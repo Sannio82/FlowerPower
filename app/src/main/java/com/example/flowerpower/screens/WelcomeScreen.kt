@@ -20,7 +20,6 @@ import com.example.flowerpower.views.buttons.GradientButton
 
 @Composable
 fun WelcomeScreen(
-   // onAction: (WelcomeScreenActions) -> Unit,
     navController: NavController
 ) {
     Box(
@@ -65,7 +64,7 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.size(60.dp))
         GradientButton(
             text = "Sign in",
-            onClick = { }
+            onClick = {navController.navigate("LogInScreen") }
         )
         Spacer(modifier = Modifier.size(20.dp))
         GradientButton(
