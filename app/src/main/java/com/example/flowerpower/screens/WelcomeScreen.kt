@@ -69,7 +69,7 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.size(20.dp))
         GradientButton(
             text = "Create account",
-            onClick = { println("Button Create account clicked")}
+            onClick = { navController.navigate("CreateAccountScreen")}
         )
     }
     }
