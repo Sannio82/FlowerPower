@@ -25,13 +25,11 @@ fun GradientButton(
     ){
         ReusableButton(
             text = text,
+            onClick = onClick,
             gradient = gradient,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-        ) {
-            onClick
-            // Log in and navigate to next screen
-        }
+        )
     }
 }
