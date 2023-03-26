@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "391533719202",
+    "project_id": "flower-power-da305",
+    "storage_bucket": "flower-power-da305.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391533719202:android:68489ceb0de2afdf30b1fb",
+        "android_client_info": {
+          "package_name": "com.example.flowerpower"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "391533719202-taf2dash7mqd155dv239gok4cedi26rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtMtKmRE8mbT47xYQkmKpBg32YUdbPYoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391533719202-taf2dash7mqd155dv239gok4cedi26rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
