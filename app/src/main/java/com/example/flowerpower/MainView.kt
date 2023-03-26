@@ -34,7 +34,7 @@ fun Content(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "LogInScreen"
+        startDestination = "CreateAccountScreen"
     ) {
         composable(route = "WelcomeScreen") { WelcomeScreen(navController) }
        // composable(route = "LogInScreen") { LogInScreen(navController) }
