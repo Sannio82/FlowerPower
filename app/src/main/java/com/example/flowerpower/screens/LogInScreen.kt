@@ -1,5 +1,7 @@
 package com.example.flowerpower.screens
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
@@ -18,28 +20,58 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
+import com.example.flowerpower.viewmodels.AuthViewModel
+import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.buttons.composables.FlowerPowerField
 
-@Preview(showBackground = true, showSystemUi = true)
+
 @Composable
-fun LogInScreen()
-//(navController: NavController)
+fun LogInScreen(navController: NavController)
 {
+    val viewModel: AuthViewModel = viewModel()
+
+    val localContext = LocalContext.current
+
     var userName by remember {
         mutableStateOf("")
     }
 
     var password by remember {
         mutableStateOf("")
+    }
+
+    val loginStatus by viewModel.userLoginStatus.collectAsState()
+
+    var showFailedDialog by remember {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(key1 = loginStatus ) {
+        when(loginStatus) {
+            is UserLoginStatus.Failure -> {
+                localContext.showToast("Unable to login")
+                println("Can not login!!!")
+                showFailedDialog = true
+            }
+            UserLoginStatus.Successful -> {
+                localContext.showToast("Login successful")
+                navController.navigate("PlantsScreen")
+            }
+            null -> {
+
+            }
+        }
     }
 
     Box(
@@ -91,10 +123,26 @@ fun LogInScreen()
                 }
             )
             LoginFooter(
-                onSignInClick = {},
+                onSignInClick = {
+                       when {
+                           userName.isBlank() -> {
+                               //Use error field for this
+                            localContext.showToast("Enter your username")
+                           }
+                           password.isBlank() -> {
+                               localContext.showToast("Enter your password")
+                           } else -> {
+                           viewModel.performLogin(userName,password)
+                           }
+                       }
+                },
                 onSignUpClick = {}
             )
         }
+    }
+
+    if(showFailedDialog) {
+        //Alert Dialog
     }
 }
 
@@ -115,7 +163,8 @@ fun LoginFields(username: String, password: String,
                             onForgotPasswordClick: () -> Unit
 ) {
     Column() {
-        FlowerPowerField(value = username,
+        FlowerPowerField(
+            value = username,
             label = "Username",
             placeholder = "Enter your email address",
             onValueChange = onUsernameChange,
@@ -156,6 +205,10 @@ fun LoginFooter(
             Text("Don´t have an account? Click here")
         }
     }
+}
+
+private fun Context.showToast(msg: String) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
 
 //{ navController.navigate("WelcomeScreen")}

@@ -9,6 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.flowerpower.screens.CreateAccountScreen
+import com.example.flowerpower.screens.LogInScreen
+import com.example.flowerpower.screens.PlantsScreen
 import com.example.flowerpower.screens.WelcomeScreen
 import com.example.flowerpower.ui.theme.FlowerPowerTheme
 
@@ -34,11 +36,12 @@ fun Content(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "CreateAccountScreen"
+        startDestination = "LogInScreen"
     ) {
         composable(route = "WelcomeScreen") { WelcomeScreen(navController) }
-       // composable(route = "LogInScreen") { LogInScreen(navController) }
+        composable(route = "LogInScreen") { LogInScreen(navController) }
         composable(route = "CreateAccountScreen") { CreateAccountScreen(navController)}
+        composable(route = "PlantsScreen") { PlantsScreen()}
 
     }
 }
