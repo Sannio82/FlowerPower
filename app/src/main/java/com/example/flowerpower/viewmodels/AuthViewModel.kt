@@ -3,6 +3,7 @@ package com.example.flowerpower.viewmodels
 import androidx.lifecycle.ViewModel
 import com.example.flowerpower.repo.FirebaseAuthRepo
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -23,7 +24,7 @@ class AuthViewModel: ViewModel() {
                 _userLoginStatus.value = UserLoginStatus.Successful
             },
             onFailure = {
-                _userLoginStatus.value = UserLoginStatus.Failure(it)
+                _userLoginStatus.value = UserLoginStatus.Failure
             }
         )
     }
@@ -34,8 +35,13 @@ class AuthViewModel: ViewModel() {
             onSuccess = {
                 _userLoginStatus.value = UserLoginStatus.Successful
             },
-            onFailure = {
-                _userLoginStatus.value = UserLoginStatus.Failure(it)
+            onFailure = { exception ->
+                if(exception is FirebaseAuthUserCollisionException) {
+                    _userLoginStatus.value = UserLoginStatus.Failure
+                } else {
+                _userLoginStatus.value = UserLoginStatus.Failure
+                    println(exception)
+                }
             }
         )
     }
@@ -43,5 +49,5 @@ class AuthViewModel: ViewModel() {
 
 sealed class UserLoginStatus {
     object Successful: UserLoginStatus()
-    class Failure(val exception: Exception?): UserLoginStatus()
+    object Failure : UserLoginStatus()
 }

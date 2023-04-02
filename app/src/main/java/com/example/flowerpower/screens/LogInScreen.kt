@@ -136,7 +136,9 @@ fun LogInScreen(navController: NavController)
                            }
                        }
                 },
-                onSignUpClick = {}
+                onSignUpClick = {
+                     navController.navigate("CreateAccountScreen")
+                }
             )
         }
     }
@@ -207,7 +209,7 @@ fun LoginFooter(
     }
 }
 
-private fun Context.showToast(msg: String) {
+fun Context.showToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
 
