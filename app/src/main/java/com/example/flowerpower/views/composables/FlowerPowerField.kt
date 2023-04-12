@@ -1,4 +1,4 @@
-package com.example.flowerpower.views.buttons.composables
+package com.example.flowerpower.views.composables
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
