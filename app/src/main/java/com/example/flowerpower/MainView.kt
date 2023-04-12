@@ -42,7 +42,6 @@ fun Content(
         composable(route = "LogInScreen") { LogInScreen(navController) }
         composable(route = "CreateAccountScreen") { CreateAccountScreen(navController)}
         composable(route = "PlantsScreen") { PlantsScreen()}
-
     }
 }
 
