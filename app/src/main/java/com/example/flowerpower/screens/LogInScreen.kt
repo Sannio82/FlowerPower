@@ -33,7 +33,7 @@ import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
-import com.example.flowerpower.views.buttons.composables.FlowerPowerField
+import com.example.flowerpower.views.composables.FlowerPowerField
 
 
 @Composable

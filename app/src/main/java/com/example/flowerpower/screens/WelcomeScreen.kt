@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.flowerpower.ui.theme.*
-import com.example.flowerpower.views.buttons.GradientButton
+import com.example.flowerpower.views.GradientButton
 
 @Composable
 fun WelcomeScreen(

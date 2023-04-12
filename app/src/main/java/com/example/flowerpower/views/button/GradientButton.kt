@@ -1,4 +1,4 @@
-package com.example.flowerpower.views.buttons
+package com.example.flowerpower.views
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
