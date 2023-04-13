@@ -26,7 +26,7 @@ fun PlantCard(plant: Plant) {
         ) {
             Column(
                 modifier = Modifier
-                    .background(Mint)
+                    .background(Mint.copy(alpha = 0.9f))
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
