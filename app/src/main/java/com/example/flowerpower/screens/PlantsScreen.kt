@@ -12,10 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
+import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.viewmodels.Plant
 import com.example.flowerpower.viewmodels.plantList
 import com.example.flowerpower.views.composables.PlantCard
@@ -38,14 +41,17 @@ fun PlantsScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 20.dp),
+                .padding(top = 30.dp, bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = "Mina plantor!",
-                fontSize = 35.sp
+                fontSize = 35.sp,
+                fontFamily = jambo,
+                fontWeight = FontWeight(600),
+                color = Blue
             )
             LazyColumn(
-                modifier = Modifier.padding(bottom = 35.dp)
+                modifier = Modifier.padding(bottom = 55.dp)
             ) {
                 items(plantList) {plant ->
                     PlantCard(plant = plant)

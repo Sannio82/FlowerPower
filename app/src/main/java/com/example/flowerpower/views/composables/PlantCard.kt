@@ -11,34 +11,40 @@ import com.example.flowerpower.viewmodels.Plant
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
-import com.example.flowerpower.ui.theme.Mint
+import com.example.flowerpower.ui.theme.*
 
 @Composable
 fun PlantCard(plant: Plant) {
         Card(
-            elevation = CardDefaults.elevatedCardElevation(4.dp),
+            elevation = CardDefaults.elevatedCardElevation(6.dp),
             modifier = Modifier
                 .fillMaxWidth()
+                .height(500.dp)
                 .padding(16.dp)
         ) {
             Column(
                 modifier = Modifier
-                    .background(Mint.copy(alpha = 0.9f))
+                    .fillMaxSize()
+                    .background(Beige)
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                Text(plant.description, modifier = Modifier.padding(top = 8.dp))
+                Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 26.sp, fontFamily = jambo, color = Blue)
                 Image(painterResource(
                     id = plant.image),
                     contentDescription = null,
                     modifier = Modifier
+                        .clip(RoundedCornerShape(50.dp))
                         .fillMaxWidth()
-                        .height(150.dp)
+
+                        .height(150.dp),
                     )
+                Text(plant.description, fontFamily = jambo, color = Blue, modifier = Modifier.padding(top = 8.dp))
             }
         }
 }
