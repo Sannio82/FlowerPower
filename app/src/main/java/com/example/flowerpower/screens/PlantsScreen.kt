@@ -7,19 +7,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.flowerpower.ui.theme.Blue
-import com.example.flowerpower.ui.theme.Coral
-import com.example.flowerpower.ui.theme.Yellow
-import com.example.flowerpower.ui.theme.jambo
-import com.example.flowerpower.viewmodels.Plant
+import com.example.flowerpower.ui.theme.*
 import com.example.flowerpower.viewmodels.plantList
 import com.example.flowerpower.views.composables.PlantCard
 
@@ -36,7 +34,7 @@ fun PlantsScreen() {
                     )
                 )
             ),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.BottomEnd
     ) {
         Column(
             modifier = Modifier
@@ -58,5 +56,16 @@ fun PlantsScreen() {
                 }
             }
         }
+
+        FloatingActionButton(
+        modifier = Modifier
+            .padding(bottom = 70.dp, end = 25.dp),
+            onClick = { /*TODO*/ },
+            contentColor = Color.Black,
+            backgroundColor = FloatingButtonColor
+            ) {
+            Text("+", fontSize = 40.sp, fontWeight = FontWeight.Bold)
+        }
+
     }
 }
