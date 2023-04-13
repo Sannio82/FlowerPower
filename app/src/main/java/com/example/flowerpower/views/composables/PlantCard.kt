@@ -9,8 +9,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.flowerpower.viewmodels.Plant
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.sp
+import com.example.flowerpower.ui.theme.Mint
 
 @Composable
 fun PlantCard(plant: Plant) {
@@ -21,16 +25,19 @@ fun PlantCard(plant: Plant) {
                 .padding(16.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(Mint)
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(plant.title, fontWeight = FontWeight.Bold)
+                Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                 Text(plant.description, modifier = Modifier.padding(top = 8.dp))
                 Image(painterResource(
                     id = plant.image),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(150.dp)
                     )
             }
         }
