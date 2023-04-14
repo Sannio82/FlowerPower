@@ -1,5 +1,7 @@
 package com.example.flowerpower.views.composables
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -17,34 +19,61 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.flowerpower.ui.theme.*
+import com.example.flowerpower.R
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PlantCard(plant: Plant) {
-        Card(
-            elevation = CardDefaults.elevatedCardElevation(6.dp),
+fun PlantCard(plant: Plant, nextWateringDate: LocalDate) {
+    val daysLeft = ChronoUnit.DAYS.between(LocalDate.now(), nextWateringDate).toInt()
+    Card(
+        elevation = CardDefaults.elevatedCardElevation(6.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+            .padding(16.dp)
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(500.dp)
-                .padding(16.dp)
+                .fillMaxSize()
+                .background(Beige)
+                .padding(3.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(Beige)
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 26.sp, fontFamily = jambo, color = Blue)
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.5f)
+            ){
                 Image(painterResource(
                     id = plant.image),
                     contentDescription = null,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(50.dp))
+                        .clip(RoundedCornerShape(15.dp))
                         .fillMaxWidth()
-
-                        .height(150.dp),
+                )
+                if (daysLeft <= 0) {
+                    Image(
+                        painterResource(id = R.drawable.waterplants),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(8.dp)
                     )
-                Text(plant.description, fontFamily = jambo, color = Blue, modifier = Modifier.padding(top = 8.dp))
+                    Text(
+                        text = "Needs water",
+                        fontFamily = jambo,
+                        color = Blue,
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 8.dp)
+                    )
+                }
             }
+            Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 26.sp, fontFamily = jambo, color = Blue,
+                modifier = Modifier.padding(15.dp))
+            Text(plant.description, fontFamily = jambo, color = Blue, modifier = Modifier.padding(top = 8.dp))
         }
+    }
 }
