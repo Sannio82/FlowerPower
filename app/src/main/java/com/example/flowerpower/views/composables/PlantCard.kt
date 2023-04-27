@@ -54,6 +54,7 @@ fun PlantCard(plant: Plant, nextWateringDate: LocalDate) {
                         .fillMaxWidth()
                 )
                 if (daysLeft <= 0) {
+                    //TODO make image clickable to show popup to reset timer if plant is watered
                     Image(
                         painterResource(id = R.drawable.waterplants),
                         contentDescription = null,
