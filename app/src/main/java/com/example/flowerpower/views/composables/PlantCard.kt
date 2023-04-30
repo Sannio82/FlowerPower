@@ -1,7 +1,5 @@
 package com.example.flowerpower.views.composables
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -20,13 +18,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.flowerpower.ui.theme.*
 import com.example.flowerpower.R
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PlantCard(plant: Plant, nextWateringDate: LocalDate) {
-    val daysLeft = ChronoUnit.DAYS.between(LocalDate.now(), nextWateringDate).toInt()
+fun PlantCard(plant: Plant) {
     Card(
         elevation = CardDefaults.elevatedCardElevation(6.dp),
         modifier = Modifier
@@ -53,7 +47,6 @@ fun PlantCard(plant: Plant, nextWateringDate: LocalDate) {
                         .clip(RoundedCornerShape(15.dp))
                         .fillMaxWidth()
                 )
-                if (daysLeft <= 0) {
                     //TODO make image clickable to show popup to reset timer if plant is watered
                     Image(
                         painterResource(id = R.drawable.waterplants),
@@ -70,7 +63,6 @@ fun PlantCard(plant: Plant, nextWateringDate: LocalDate) {
                             .align(Alignment.BottomCenter)
                             .padding(bottom = 8.dp)
                     )
-                }
             }
             Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 26.sp, fontFamily = jambo, color = Blue,
                 modifier = Modifier.padding(15.dp))
