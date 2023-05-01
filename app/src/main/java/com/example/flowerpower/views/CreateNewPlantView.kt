@@ -12,7 +12,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,17 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.flowerpower.R
 import com.example.flowerpower.repo.addDataToFirebase
 import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
+import androidx.compose.foundation.Image
 
 @Composable
-fun CreateNewPlantView() {
+fun CreateNewPlantView(closeAction: () -> Unit) {
 
     var plantName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -57,7 +59,7 @@ fun CreateNewPlantView() {
                 contentAlignment = Alignment.TopEnd
             ) {
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { closeAction() },
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .border(width = 2.dp, color = Blue, shape = CircleShape)
@@ -78,12 +80,10 @@ fun CreateNewPlantView() {
             )
             Spacer(modifier = Modifier.size(25.dp))
             IconButton(
-                onClick = { /*TODO*/ })
+                modifier = Modifier.padding(bottom = 15.dp),
+                onClick = {  })
             {
-                Icon(
-                    Icons.Default.Info,
-                    contentDescription = "Add image"
-                )
+                Image(painter = painterResource(id = R.drawable.image), contentDescription = null )
             }
             TextField(
                 value = plantName,
