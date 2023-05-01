@@ -11,9 +11,7 @@ import com.example.flowerpower.viewmodels.Plant
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import com.example.flowerpower.ui.theme.*
@@ -40,13 +38,13 @@ fun PlantCard(plant: Plant) {
                     .fillMaxWidth()
                     .fillMaxHeight(0.5f)
             ){
-                Image(painterResource(
+             /*   Image(painterResource(
                     id = plant.image),
                     contentDescription = null,
                     modifier = Modifier
                         .clip(RoundedCornerShape(15.dp))
                         .fillMaxWidth()
-                )
+                )*/
                     //TODO make image clickable to show popup to reset timer if plant is watered
                     Image(
                         painterResource(id = R.drawable.waterplants),

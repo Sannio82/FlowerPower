@@ -1,5 +1,7 @@
 package com.example.flowerpower.views
 
+import android.text.TextUtils
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,9 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.flowerpower.repo.addDataToFirebase
 import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
@@ -28,6 +32,8 @@ fun CreateNewPlantView() {
 
     var plantName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -85,7 +91,18 @@ fun CreateNewPlantView() {
             ) {
                 GradientButton(
                     text = "Spara",
-                ) { /*TODO skicka allt till firebase*/
+                ) {
+                    if (TextUtils.isEmpty(plantName)) {
+                        Toast.makeText(context, "Please enter plant name", Toast.LENGTH_SHORT).show()
+                    } else if (TextUtils.isEmpty(description)) {
+                        Toast.makeText(context, "Please enter description", Toast.LENGTH_SHORT).show()
+                    }  else {
+                        addDataToFirebase(
+                            plantName,
+                            description,
+                            context
+                        )
+                    }
                     println("Nu ska allt skickas iväg")
                 }
             }

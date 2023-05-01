@@ -1,9 +1,11 @@
 package com.example.flowerpower
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Home
@@ -25,6 +27,7 @@ import com.example.flowerpower.views.navigationbar.BottomNavItem
 import com.example.flowerpower.views.navigationbar.NavigationBar
 
 class MainActivity: ComponentActivity() {
+        @RequiresApi(Build.VERSION_CODES.O)
         @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
         @OptIn(ExperimentalMaterial3Api::class)
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,9 +75,10 @@ class MainActivity: ComponentActivity() {
         }
     }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Navigation(
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     NavHost(
         navController = navController,
@@ -84,6 +88,5 @@ fun Navigation(
         composable(route = "LogInScreen") { LogInScreen(navController) }
         composable(route = "CreateAccountScreen") { CreateAccountScreen(navController) }
         composable(route = "PlantsScreen") { PlantsScreen() }
-
     }
 }
