@@ -3,7 +3,9 @@ package com.example.flowerpower.viewmodels
 data class Plant(
     val title: String,
     val description: String,
-)
+) {
+    constructor() : this("", "")
+}
 
 val plantList = listOf(
     Plant("Kaktus", "Vattna varje fredag"),

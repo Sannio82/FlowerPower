@@ -24,12 +24,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.flowerpower.R
-import com.example.flowerpower.repo.addDataToFirebase
 import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
 import androidx.compose.foundation.Image
+import com.example.flowerpower.repo.StorageRepository
 
 @Composable
 fun CreateNewPlantView(closeAction: () -> Unit) {
@@ -116,7 +116,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                     } else if (TextUtils.isEmpty(description)) {
                         Toast.makeText(context, "Please enter description", Toast.LENGTH_SHORT).show()
                     }  else {
-                        addDataToFirebase(
+                        StorageRepository.addDataToFirebase(
                             plantName,
                             description,
                             context

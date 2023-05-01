@@ -1,5 +1,7 @@
 package com.example.flowerpower
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import com.example.flowerpower.screens.PlantsScreen
 import com.example.flowerpower.screens.WelcomeScreen
 import com.example.flowerpower.ui.theme.FlowerPowerTheme
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainView() {
     val navController = rememberNavController()
@@ -23,11 +26,13 @@ fun MainView() {
             Content(
                 modifier = Modifier.padding(innerPadding),
                 navController = navController,
+
             )
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Content(
     modifier: Modifier,
