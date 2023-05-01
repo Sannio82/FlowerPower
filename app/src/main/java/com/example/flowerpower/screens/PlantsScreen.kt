@@ -28,7 +28,7 @@ import com.example.flowerpower.views.composables.PlantCard
 @Composable
 fun PlantsScreen() {
 
-    var isCreatePlantScreenOpen by remember { mutableStateOf(true) }
+    var isCreatePlantScreenOpen by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -74,7 +74,7 @@ fun PlantsScreen() {
             Text("+", fontSize = 40.sp, fontWeight = FontWeight.Bold)
         }
         if(isCreatePlantScreenOpen) {
-            CreateNewPlantView()
+            CreateNewPlantView(closeAction = { isCreatePlantScreenOpen = false })
         }
     }
 }

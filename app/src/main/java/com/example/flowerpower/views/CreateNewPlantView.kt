@@ -3,13 +3,15 @@ package com.example.flowerpower.views
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,17 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.flowerpower.R
 import com.example.flowerpower.repo.addDataToFirebase
 import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
+import androidx.compose.foundation.Image
 
 @Composable
-fun CreateNewPlantView() {
+fun CreateNewPlantView(closeAction: () -> Unit) {
 
     var plantName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
@@ -46,9 +51,26 @@ fun CreateNewPlantView() {
                 .fillMaxSize(0.92f)
                 .clip(shape = RoundedCornerShape(15.dp))
                 .background(Beige)
-                .padding(15.dp),
+                .padding(top = 20.dp, start = 20.dp, end = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.TopEnd
+            ) {
+                IconButton(
+                    onClick = { closeAction() },
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .border(width = 2.dp, color = Blue, shape = CircleShape)
+                ) {
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = "Add image"
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.size(30.dp))
             Text(
                 text = "Lägg till ny planta",
                 fontSize = 35.sp,
@@ -58,12 +80,10 @@ fun CreateNewPlantView() {
             )
             Spacer(modifier = Modifier.size(25.dp))
             IconButton(
-                onClick = { /*TODO*/ })
+                modifier = Modifier.padding(bottom = 15.dp),
+                onClick = {  })
             {
-                Icon(
-                    Icons.Default.Info,
-                    contentDescription = "Add image"
-                )
+                Image(painter = painterResource(id = R.drawable.image), contentDescription = null )
             }
             TextField(
                 value = plantName,
@@ -84,7 +104,9 @@ fun CreateNewPlantView() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 40.dp, bottom = 20.dp, start = 20.dp, end = 20.dp)
+                    .padding(top = 40.dp, bottom = 20.dp, start = 20.dp, end = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
             ) {
                 GradientButton(
                     text = "Spara",
@@ -99,8 +121,8 @@ fun CreateNewPlantView() {
                             description,
                             context
                         )
+                        closeAction()
                     }
-                    println("Nu ska allt skickas iväg")
                 }
             }
         }

@@ -20,9 +20,7 @@ fun GradientButton(
     Column(
         modifier = Modifier
             .size(width = 290.dp, height = 50.dp)
-            .fillMaxHeight(0.17f)
             .clip(shape = RoundedCornerShape(30.dp)),
-
     ){
         ReusableButton(
             text = text,

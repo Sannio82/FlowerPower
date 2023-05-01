@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
@@ -91,12 +91,7 @@ fun CreateAccountScreen(navController: NavController)
                 .padding(28.dp)
                 .alpha(0.6f)
                 .clip(
-                    CutCornerShape(
-                        topStart = 8.dp,
-                        topEnd = 16.dp,
-                        bottomStart = 16.dp,
-                        bottomEnd = 8.dp
-                    )
+                    RoundedCornerShape(16.dp)
                 )
                 .background(Color.White)
         )
