@@ -14,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -38,15 +37,13 @@ fun CreateNewPlantView() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .blur(20.dp)
             .background(Color.Transparent),
         contentAlignment = Alignment.Center,
     )
     {
         Column(
             modifier = Modifier
-                .fillMaxWidth(0.92f)
-                .fillMaxHeight(0.8f)
+                .fillMaxSize(0.92f)
                 .clip(shape = RoundedCornerShape(15.dp))
                 .background(Beige)
                 .padding(15.dp),
