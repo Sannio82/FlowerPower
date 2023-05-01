@@ -121,8 +121,8 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                             description,
                             context
                         )
+                        closeAction()
                     }
-                    println("Nu ska allt skickas iväg")
                 }
             }
         }
