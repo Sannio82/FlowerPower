@@ -16,17 +16,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.flowerpower.repo.StorageRepository
 import com.example.flowerpower.ui.theme.*
-import com.example.flowerpower.viewmodels.plantList
+import com.example.flowerpower.viewmodels.Plant
 import com.example.flowerpower.views.CreateNewPlantView
 import com.example.flowerpower.views.composables.PlantCard
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlantsScreen() {
+
+    val context = LocalContext.current
+    var plantsList by remember { mutableStateOf(listOf<Plant>()) }
+    StorageRepository.readDataFromFirestore(context) { plants ->
+        plantsList = plants
+    }
 
     var isCreatePlantScreenOpen by remember { mutableStateOf(false) }
 
@@ -58,8 +66,8 @@ fun PlantsScreen() {
             LazyColumn(
                 modifier = Modifier.padding(bottom = 55.dp)
             ) {
-                items(plantList) {plant ->
-                    PlantCard(plant = plant)
+                items(plantsList) {plant ->
+                        PlantCard(plant = plant)
                 }
             }
         }
