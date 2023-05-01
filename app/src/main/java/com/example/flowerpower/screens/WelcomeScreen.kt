@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.flowerpower.ui.theme.*
-import com.example.flowerpower.views.GradientButton
+import com.example.flowerpower.views.button.GradientButton
 
 @Composable
 fun WelcomeScreen(
@@ -64,13 +64,12 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.size(60.dp))
         GradientButton(
             text = "Sign in",
-            onClick = {navController.navigate("LogInScreen") }
-        )
+        ) { navController.navigate("LogInScreen") }
         Spacer(modifier = Modifier.size(20.dp))
         GradientButton(
             text = "Create account",
-            onClick = { navController.navigate("CreateAccountScreen")}
-        )
+
+            ) { navController.navigate("CreateAccountScreen") }
     }
     }
 }
