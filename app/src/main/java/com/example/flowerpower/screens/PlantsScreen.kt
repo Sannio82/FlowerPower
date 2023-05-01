@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,8 +33,11 @@ fun PlantsScreen() {
 
     val context = LocalContext.current
     var plantsList by remember { mutableStateOf(listOf<Plant>()) }
-    StorageRepository.readDataFromFirestore(context) { plants ->
-        plantsList = plants
+
+    LaunchedEffect(plantsList) {
+        StorageRepository.readDataFromFirestore(context) { plants ->
+            plantsList = plants
+        }
     }
 
     var isCreatePlantScreenOpen by remember { mutableStateOf(false) }
@@ -63,11 +67,18 @@ fun PlantsScreen() {
                 fontWeight = FontWeight(600),
                 color = Blue
             )
-            LazyColumn(
-                modifier = Modifier.padding(bottom = 55.dp)
-            ) {
-                items(plantsList) {plant ->
+            if (plantsList.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier.padding(bottom = 55.dp)
+                ) {
+                    items(plantsList) { plant ->
                         PlantCard(plant = plant)
+                    }
+                }
+            } else {
+                Text(" Du har inte några tillagda plantor än... ")
+                TextButton(onClick = { isCreatePlantScreenOpen = true }) {
+                   Text(text = "...men det är lätt ordnat om du trycker här!")
                 }
             }
         }
