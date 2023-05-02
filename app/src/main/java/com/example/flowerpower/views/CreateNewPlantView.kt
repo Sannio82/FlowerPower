@@ -33,6 +33,8 @@ import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
 import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
 import com.example.flowerpower.repo.StorageRepository
 
 @Composable
@@ -92,16 +94,16 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 color = Blue
             )
             Spacer(modifier = Modifier.size(25.dp))
-            IconButton(
-                modifier = Modifier.padding(bottom = 15.dp),
-                onClick = {
-                    singlePhotoPickerLauncher.launch(
-                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                    )
-                })
-            {
-                Image(painter = painterResource(id = R.drawable.image), contentDescription = null )
-            }
+                IconButton(
+                    modifier = Modifier.padding(bottom = 15.dp),
+                    onClick = {
+                        singlePhotoPickerLauncher.launch(
+                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                        )
+                    })
+                {
+                    SelectedImage(selectedImageUri = selectedImageUri)
+                }
             TextField(
                 value = plantName,
                 label = { Text(text = "Namn på planta") },
@@ -146,5 +148,29 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun SelectedImage(selectedImageUri: Uri?) {
+    selectedImageUri?.let {
+        AsyncImage(
+            model = it,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.3f)
+                .clip(RoundedCornerShape(10.dp)),
+            contentScale = ContentScale.Crop
+        )
+    } ?: run {
+        Image(
+            painter = painterResource(id = R.drawable.image),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.3f),
+            contentScale = ContentScale.Crop
+        )
     }
 }
