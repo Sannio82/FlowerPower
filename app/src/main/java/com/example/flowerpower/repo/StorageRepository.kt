@@ -8,6 +8,7 @@ import com.example.flowerpower.viewmodels.Plant
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 object StorageRepository {
     fun addDataToFirebase(
@@ -18,30 +19,29 @@ object StorageRepository {
     ) {
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val dbPlants: CollectionReference = db.collection("plants")
-        val plants = imageUri.let { Plant(plantName, description = plantDescription, it) }
+        val plantId = UUID.randomUUID().toString()
 
-        dbPlants.add(plants).addOnSuccessListener { documentReference ->
-                val storageRef =
-                    FirebaseStorage.getInstance().getReference("images/${documentReference.id}")
-                storageRef.putFile(imageUri)
-                    .addOnSuccessListener {
-                        storageRef.downloadUrl.addOnSuccessListener { uri ->
-                            dbPlants.document(documentReference.id)
-                                .update("imageUrl", uri.toString())
+        val storageRef = FirebaseStorage.getInstance().getReference("images/$plantId")
+        storageRef.putFile(imageUri)
+            .addOnSuccessListener { uploadTask ->
+                storageRef.downloadUrl.addOnSuccessListener { uri ->
+                    val plant = Plant(plantName, plantDescription, uri)
+                    dbPlants.document(plantId).set(plant)
+                        .addOnSuccessListener {
                             Toast.makeText(
                                 context,
                                 "Your plant and image has been added successfully!",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-                    }.addOnFailureListener { e ->
-                        Toast.makeText(context, "Failed to upload image \n$e", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-            }
-                .addOnFailureListener { e ->
-                    Toast.makeText(context, "Fail to add plant \n$e", Toast.LENGTH_SHORT).show()
+                        .addOnFailureListener { e ->
+                            Toast.makeText(context, "Failed to add plant \n$e", Toast.LENGTH_SHORT).show()
+                        }
                 }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Failed to upload image \n$e", Toast.LENGTH_SHORT).show()
+            }
     }
 
     fun readDataFromFirestore(context: Context, callback: (List<Plant>) -> Unit) {
