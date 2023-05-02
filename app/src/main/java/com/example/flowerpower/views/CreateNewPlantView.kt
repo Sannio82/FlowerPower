@@ -1,7 +1,11 @@
 package com.example.flowerpower.views
 
+import android.net.Uri
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -37,6 +41,15 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
     var plantName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+
+    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri }
+    )
+
     val context = LocalContext.current
 
     Box(
@@ -66,7 +79,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 ) {
                     Icon(
                         Icons.Default.Close,
-                        contentDescription = "Add image"
+                        contentDescription = "Close"
                     )
                 }
             }
@@ -81,7 +94,11 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             Spacer(modifier = Modifier.size(25.dp))
             IconButton(
                 modifier = Modifier.padding(bottom = 15.dp),
-                onClick = {  })
+                onClick = {
+                    singlePhotoPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
+                })
             {
                 Image(painter = painterResource(id = R.drawable.image), contentDescription = null )
             }
@@ -116,11 +133,14 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                     } else if (TextUtils.isEmpty(description)) {
                         Toast.makeText(context, "Please enter description", Toast.LENGTH_SHORT).show()
                     }  else {
-                        StorageRepository.addDataToFirebase(
-                            plantName,
-                            description,
-                            context
-                        )
+                        selectedImageUri?.let {
+                            StorageRepository.addDataToFirebase(
+                                plantName,
+                                description,
+                                it,
+                                context
+                            )
+                        }
                         closeAction()
                     }
                 }

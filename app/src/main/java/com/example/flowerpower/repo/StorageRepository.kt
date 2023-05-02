@@ -1,33 +1,47 @@
 package com.example.flowerpower.repo
 
 import android.content.Context
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
 import com.example.flowerpower.viewmodels.Plant
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-
+import com.google.firebase.storage.FirebaseStorage
 
 object StorageRepository {
     fun addDataToFirebase(
         plantName: String,
         plantDescription: String,
+        imageUri: Uri,
         context: Context
     ) {
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val dbPlants: CollectionReference = db.collection("plants")
-        val plants = Plant(plantName, description = plantDescription)
+        val plants = imageUri.let { Plant(plantName, description = plantDescription, it) }
 
-        dbPlants.add(plants).addOnSuccessListener {
-            Toast.makeText(
-                context,
-                "Your plant has been added to Firebase Firestore",
-                Toast.LENGTH_SHORT
-            ).show()
-
-        }.addOnFailureListener { e ->
-            Toast.makeText(context, "Fail to add plant \n$e", Toast.LENGTH_SHORT).show()
-        }
+        dbPlants.add(plants).addOnSuccessListener { documentReference ->
+                val storageRef =
+                    FirebaseStorage.getInstance().getReference("images/${documentReference.id}")
+                storageRef.putFile(imageUri)
+                    .addOnSuccessListener {
+                        storageRef.downloadUrl.addOnSuccessListener { uri ->
+                            dbPlants.document(documentReference.id)
+                                .update("imageUrl", uri.toString())
+                            Toast.makeText(
+                                context,
+                                "Your plant and image has been added successfully!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(context, "Failed to upload image \n$e", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            }
+                .addOnFailureListener { e ->
+                    Toast.makeText(context, "Fail to add plant \n$e", Toast.LENGTH_SHORT).show()
+                }
     }
 
     fun readDataFromFirestore(context: Context, callback: (List<Plant>) -> Unit) {
@@ -39,7 +53,13 @@ object StorageRepository {
             .addOnSuccessListener { querySnapshot ->
                 val plants = mutableStateListOf<Plant>()
                 for (document in querySnapshot) {
-                    val plant = document.toObject(Plant::class.java)
+                    val imageUrl = document.getString("imageUrl")
+                    val uri = if (!imageUrl.isNullOrEmpty()) Uri.parse(imageUrl) else Uri.EMPTY
+                    val plant = Plant(
+                        document.getString("title") ?: "",
+                        document.getString("description") ?: "",
+                        uri
+                    )
                     plants.add(plant)
                 }
                 callback(plants)
@@ -49,6 +69,7 @@ object StorageRepository {
             }
     }
 }
+
 
 
 

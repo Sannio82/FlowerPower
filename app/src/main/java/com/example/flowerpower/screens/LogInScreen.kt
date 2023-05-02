@@ -203,9 +203,6 @@ fun LoginFooter(
         }
     }
 }
-
 fun Context.showToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
-
-//{ navController.navigate("WelcomeScreen")}
