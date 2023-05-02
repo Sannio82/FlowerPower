@@ -1,7 +1,11 @@
 package com.example.flowerpower.views
 
+import android.net.Uri
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -29,6 +33,8 @@ import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
 import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
 import com.example.flowerpower.repo.StorageRepository
 
 @Composable
@@ -36,6 +42,15 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
 
     var plantName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+
+    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri }
+    )
 
     val context = LocalContext.current
 
@@ -66,7 +81,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 ) {
                     Icon(
                         Icons.Default.Close,
-                        contentDescription = "Add image"
+                        contentDescription = "Close"
                     )
                 }
             }
@@ -79,12 +94,16 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 color = Blue
             )
             Spacer(modifier = Modifier.size(25.dp))
-            IconButton(
-                modifier = Modifier.padding(bottom = 15.dp),
-                onClick = {  })
-            {
-                Image(painter = painterResource(id = R.drawable.image), contentDescription = null )
-            }
+                IconButton(
+                    modifier = Modifier.padding(bottom = 15.dp),
+                    onClick = {
+                        singlePhotoPickerLauncher.launch(
+                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                        )
+                    })
+                {
+                    SelectedImage(selectedImageUri = selectedImageUri)
+                }
             TextField(
                 value = plantName,
                 label = { Text(text = "Namn på planta") },
@@ -116,15 +135,42 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                     } else if (TextUtils.isEmpty(description)) {
                         Toast.makeText(context, "Please enter description", Toast.LENGTH_SHORT).show()
                     }  else {
-                        StorageRepository.addDataToFirebase(
-                            plantName,
-                            description,
-                            context
-                        )
+                        selectedImageUri?.let {
+                            StorageRepository.addDataToFirebase(
+                                plantName,
+                                description,
+                                it,
+                                context
+                            )
+                        }
                         closeAction()
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun SelectedImage(selectedImageUri: Uri?) {
+    selectedImageUri?.let {
+        AsyncImage(
+            model = it,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.3f)
+                .clip(RoundedCornerShape(10.dp)),
+            contentScale = ContentScale.Crop
+        )
+    } ?: run {
+        Image(
+            painter = painterResource(id = R.drawable.image),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.3f),
+            contentScale = ContentScale.Crop
+        )
     }
 }
