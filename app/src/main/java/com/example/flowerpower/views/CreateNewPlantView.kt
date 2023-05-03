@@ -6,8 +6,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,7 +31,6 @@ import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
-import androidx.compose.foundation.Image
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import com.example.flowerpower.repo.StorageRepository
@@ -85,7 +83,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                     )
                 }
             }
-            Spacer(modifier = Modifier.size(30.dp))
+            Spacer(modifier = Modifier.size(20.dp))
             Text(
                 text = "Lägg till ny planta",
                 fontSize = 35.sp,
