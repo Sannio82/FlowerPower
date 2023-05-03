@@ -3,13 +3,17 @@ package com.example.flowerpower.screens
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.*
@@ -28,8 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
+import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.composables.FlowerPowerField
@@ -103,8 +109,8 @@ fun CreateAccountScreen(navController: NavController)
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            SignUpHeader()
-            SignUpFields(userName, password, navController = navController,
+            SignUpHeader(navController = navController)
+            SignUpFields(userName, password,
                 onUsernameChange = {
                     userName = it
                 },
@@ -136,11 +142,28 @@ fun CreateAccountScreen(navController: NavController)
 }
 
 @Composable
-fun SignUpHeader() {
+fun SignUpHeader(navController: NavController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "CreateAccount!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.TopStart
+        ) {
+            IconButton(
+                onClick = { navController.navigate("WelcomeScreen")},
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .border(width = 2.dp, color = Blue, shape = CircleShape)
+            ) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    contentDescription = "Close"
+                )
+            }
+        }
+        Spacer(modifier = Modifier.size(25.dp))
+        Text(text = "CreateAccount!", fontFamily = jambo, color = Blue, fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
     }
 }
 
@@ -148,7 +171,6 @@ fun SignUpHeader() {
 fun SignUpFields(username: String, password: String,
                 onUsernameChange: (String) -> Unit,
                 onPasswordChange: (String) -> Unit,
-                navController: NavController
 ) {
     Column() {
         FlowerPowerField(
@@ -173,10 +195,6 @@ fun SignUpFields(username: String, password: String,
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Go)
         )
-
-        Button(onClick = { navController.navigate("WelcomeScreen")}) {
-            Text("Tillbaka!")
-        }
     }
 }
 
@@ -186,7 +204,7 @@ fun SignUpFooter(
 ) {
     Column() {
         Button(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Sign up")
+            Text("Sign up", fontFamily = jambo, color = Blue,)
         }
     }
 }

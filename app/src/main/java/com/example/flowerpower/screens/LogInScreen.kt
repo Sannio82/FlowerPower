@@ -29,8 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
+import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.composables.FlowerPowerField
@@ -148,8 +150,8 @@ fun LoginHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome back!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
-        Text(text = "Sign in to continue", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+        Text(text = "Welcome back!", fontFamily = jambo, color = Blue, fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
+        Text(text = "Sign in to continue", fontFamily = jambo, color = Blue,fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
     }
 }
 
@@ -184,7 +186,7 @@ fun LoginFields(username: String, password: String,
         )
 
         TextButton(onClick = onForgotPasswordClick, modifier = Modifier.align(Alignment.End)) {
-            Text(text = "Forgot password?")
+            Text(text = "Forgot password?",fontFamily = jambo, color = Blue,)
         }
     }
 }
@@ -196,10 +198,10 @@ fun LoginFooter(
 ) {
     Column() {
         Button(onClick = onSignInClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Sign in")
+            Text(text ="Sign in",fontFamily = jambo )
         }
         TextButton(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Don´t have an account? Click here")
+            Text(text ="Don´t have an account? Click here",fontFamily = jambo, color = Blue,)
         }
     }
 }
