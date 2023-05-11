@@ -29,8 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
+import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.composables.FlowerPowerField
@@ -112,9 +114,6 @@ fun LogInScreen(navController: NavController)
                 },
                 onPasswordChange = {
                     password = it
-                },
-                onForgotPasswordClick = {
-
                 }
             )
             LoginFooter(
@@ -148,8 +147,8 @@ fun LoginHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome back!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
-        Text(text = "Sign in to continue", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+        Text(text = "Welcome back!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
+        Text(text = "Sign in to continue", fontSize = 18.sp, fontWeight = FontWeight.SemiBold, fontFamily = vanillaCake, color = Blue)
     }
 }
 
@@ -157,7 +156,6 @@ fun LoginHeader() {
 fun LoginFields(username: String, password: String,
                             onUsernameChange: (String) -> Unit,
                             onPasswordChange: (String) -> Unit,
-                            onForgotPasswordClick: () -> Unit
 ) {
     Column() {
         FlowerPowerField(
@@ -182,10 +180,6 @@ fun LoginFields(username: String, password: String,
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Go)
         )
-
-        TextButton(onClick = onForgotPasswordClick, modifier = Modifier.align(Alignment.End)) {
-            Text(text = "Forgot password?")
-        }
     }
 }
 
@@ -196,10 +190,10 @@ fun LoginFooter(
 ) {
     Column() {
         Button(onClick = onSignInClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Sign in")
+            Text("Sign in", fontFamily = vanillaCake)
         }
         TextButton(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Don´t have an account? Click here")
+            Text("Don´t have an account? Click here", fontFamily = vanillaCake)
         }
     }
 }

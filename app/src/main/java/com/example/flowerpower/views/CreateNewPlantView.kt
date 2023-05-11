@@ -29,11 +29,11 @@ import androidx.compose.ui.unit.sp
 import com.example.flowerpower.R
 import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
-import com.example.flowerpower.ui.theme.jambo
 import com.example.flowerpower.views.button.GradientButton
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import com.example.flowerpower.repo.StorageRepository
+import com.example.flowerpower.ui.theme.vanillaCake
 
 @Composable
 fun CreateNewPlantView(closeAction: () -> Unit) {
@@ -87,7 +87,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             Text(
                 text = "Lägg till ny planta",
                 fontSize = 35.sp,
-                fontFamily = jambo,
+                fontFamily = vanillaCake,
                 fontWeight = FontWeight(600),
                 color = Blue
             )
@@ -104,8 +104,8 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 }
             TextField(
                 value = plantName,
-                label = { Text(text = "Namn på planta") },
-                placeholder = { Text(text = "Skriv namn på plantan") },
+                label = { Text(text = "Namn på planta", fontFamily = vanillaCake) },
+                placeholder = { Text(text = "Skriv namn på plantan", fontFamily = vanillaCake) },
                 onValueChange = { newPlantName ->
                     plantName = newPlantName
                 },
@@ -113,8 +113,8 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             Spacer(modifier = Modifier.size(25.dp))
             TextField(
                 value = description,
-                label = { Text(text = "Beskrivning") },
-                placeholder = { Text(text = "Skriv namn på plantan") },
+                label = { Text(text = "Beskrivning", fontFamily = vanillaCake) },
+                placeholder = { Text(text = "Skriv namn på plantan", fontFamily = vanillaCake) },
                 onValueChange = { newDescription ->
                     description = newDescription
                 })

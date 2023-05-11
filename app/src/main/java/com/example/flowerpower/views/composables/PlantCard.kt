@@ -40,6 +40,7 @@ fun PlantCard(plant: Plant) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight(0.5f)
+                    .padding(top = 20.dp)
             ){
                 Image(
                     painter = rememberAsyncImagePainter(model = plant.imageUrl),
@@ -56,18 +57,10 @@ fun PlantCard(plant: Plant) {
                             .align(Alignment.BottomEnd)
                             .padding(8.dp)
                     )
-                    Text(
-                        text = "Needs water",
-                        fontFamily = jambo,
-                        color = Blue,
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(bottom = 8.dp)
-                    )
             }
-            Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 26.sp, fontFamily = jambo, color = Blue,
+            Text(plant.title, fontWeight = FontWeight.Bold, fontSize = 26.sp, fontFamily = vanillaCake, color = Blue,
                 modifier = Modifier.padding(15.dp))
-            Text(plant.description, fontFamily = jambo, color = Blue, modifier = Modifier.padding(top = 8.dp))
+            Text(plant.description, fontFamily = vanillaCake, color = Blue, modifier = Modifier.padding(top = 8.dp))
         }
     }
 }
