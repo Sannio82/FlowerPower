@@ -61,10 +61,8 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
     {
         Column(
             modifier = Modifier
-                .fillMaxSize(0.92f)
-                .clip(shape = RoundedCornerShape(15.dp))
-                .background(Beige)
-                .padding(top = 20.dp, start = 20.dp, end = 20.dp),
+                .fillMaxSize()
+                .background(Beige),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
@@ -74,16 +72,17 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 IconButton(
                     onClick = { closeAction() },
                     modifier = Modifier
+                        .padding(top = 20.dp, end = 20.dp)
                         .align(Alignment.TopEnd)
                         .border(width = 2.dp, color = Blue, shape = CircleShape)
                 ) {
                     Icon(
                         Icons.Default.Close,
-                        contentDescription = "Close"
+                        contentDescription = "Close",
+                        tint = Blue
                     )
                 }
             }
-            Spacer(modifier = Modifier.size(20.dp))
             Text(
                 text = "Lägg till ny planta",
                 fontSize = 35.sp,
@@ -91,7 +90,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 fontWeight = FontWeight(600),
                 color = Blue
             )
-            Spacer(modifier = Modifier.size(25.dp))
+            Spacer(modifier = Modifier.size(20.dp))
                 IconButton(
                     modifier = Modifier.padding(bottom = 15.dp),
                     onClick = {
@@ -110,7 +109,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                     plantName = newPlantName
                 },
                 )
-            Spacer(modifier = Modifier.size(25.dp))
+            Spacer(modifier = Modifier.size(5.dp))
             TextField(
                 value = description,
                 label = { Text(text = "Beskrivning", fontFamily = vanillaCake) },

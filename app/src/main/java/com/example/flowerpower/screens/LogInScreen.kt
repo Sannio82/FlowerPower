@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -35,6 +34,8 @@ import com.example.flowerpower.ui.theme.Yellow
 import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
+import com.example.flowerpower.views.button.ButtonBack
+import com.example.flowerpower.views.button.GradientButton
 import com.example.flowerpower.views.composables.FlowerPowerField
 
 
@@ -99,7 +100,11 @@ fun LogInScreen(navController: NavController)
                 )
                 .background(Color.White)
         )
-
+Box() {
+    ButtonBack(
+        modifier = Modifier.padding(35.dp),
+        onClick = { navController.navigate("WelcomeScreen") }
+    )
         Column(
             Modifier
                 .fillMaxSize()
@@ -118,23 +123,25 @@ fun LogInScreen(navController: NavController)
             )
             LoginFooter(
                 onSignInClick = {
-                       when {
-                           userName.isBlank() -> {
-                               //Use error field for this
+                    when {
+                        userName.isBlank() -> {
+                            //Use error field for this
                             localContext.showToast("Enter your username")
-                           }
-                           password.isBlank() -> {
-                               localContext.showToast("Enter your password")
-                           } else -> {
-                           viewModel.performLogin(userName,password)
-                           }
-                       }
+                        }
+                        password.isBlank() -> {
+                            localContext.showToast("Enter your password")
+                        }
+                        else -> {
+                            viewModel.performLogin(userName, password)
+                        }
+                    }
                 },
                 onSignUpClick = {
-                     navController.navigate("CreateAccountScreen")
+                    navController.navigate("CreateAccountScreen")
                 }
             )
         }
+    }
     }
 
     if(showFailedDialog) {
@@ -188,15 +195,17 @@ fun LoginFooter(
     onSignInClick: () -> Unit,
     onSignUpClick: () -> Unit
 ) {
-    Column() {
-        Button(onClick = onSignInClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Sign in", fontFamily = vanillaCake)
-        }
+    Column {
+      GradientButton(
+          text = "Sign in",
+            onClick = onSignInClick
+          )
         TextButton(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Don´t have an account? Click here", fontFamily = vanillaCake)
+            Text("Don´t have an account? Click here", fontFamily = vanillaCake, color = Blue)
         }
     }
 }
+
 fun Context.showToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

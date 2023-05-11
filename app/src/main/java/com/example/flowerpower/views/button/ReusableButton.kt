@@ -44,9 +44,3 @@ fun ReusableButton(
              }
         }
     }
-
-//@Preview
-//@Composable
-//fun PreviewReusableButton() {
-//    ReusableButton(text = "Log in", onClick = {})
-//}

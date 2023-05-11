@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -34,10 +33,14 @@ import com.example.flowerpower.ui.theme.Yellow
 import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
+import com.example.flowerpower.views.button.ButtonBack
+import com.example.flowerpower.views.button.GradientButton
 import com.example.flowerpower.views.composables.FlowerPowerField
 
 @Composable
-fun CreateAccountScreen(navController: NavController)
+fun CreateAccountScreen(
+    navController: NavController
+)
 {
     val viewModel: AuthViewModel = viewModel()
 
@@ -97,7 +100,11 @@ fun CreateAccountScreen(navController: NavController)
                 )
                 .background(Color.White)
         )
-
+        Box(){
+            ButtonBack(
+                modifier = Modifier.padding(35.dp),
+                onClick = { navController.navigate("WelcomeScreen") }
+            )
         Column(
             Modifier
                 .fillMaxSize()
@@ -106,7 +113,8 @@ fun CreateAccountScreen(navController: NavController)
             verticalArrangement = Arrangement.SpaceAround
         ) {
             SignUpHeader()
-            SignUpFields(userName, password, navController = navController,
+            SignUpFields(
+                userName, password,
                 onUsernameChange = {
                     userName = it
                 },
@@ -123,13 +131,15 @@ fun CreateAccountScreen(navController: NavController)
                         }
                         password.isBlank() -> {
                             localContext.showToast("Enter your password")
-                        } else -> {
-                        viewModel.createAccount(userName,password)
-                    }
+                        }
+                        else -> {
+                            viewModel.createAccount(userName, password)
+                        }
                     }
                 }
             )
         }
+    }
     }
 
     if(showFailedDialog) {
@@ -142,7 +152,7 @@ fun SignUpHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "CreateAccount!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
+        Text(text = "Create account!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
     }
 }
 
@@ -150,7 +160,6 @@ fun SignUpHeader() {
 fun SignUpFields(username: String, password: String,
                 onUsernameChange: (String) -> Unit,
                 onPasswordChange: (String) -> Unit,
-                navController: NavController
 ) {
     Column() {
         FlowerPowerField(
@@ -175,10 +184,6 @@ fun SignUpFields(username: String, password: String,
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Go)
         )
-
-        Button(onClick = { navController.navigate("WelcomeScreen")}) {
-            Text("Tillbaka!", fontFamily = vanillaCake)
-        }
     }
 }
 
@@ -187,19 +192,17 @@ fun SignUpFooter(
     onSignUpClick: () -> Unit
 ) {
     Column() {
-        Button(onClick = onSignUpClick,
-            modifier = Modifier
-            .fillMaxWidth()
-
-        ) {
-            Text("Sign up", fontFamily = vanillaCake)
-        }
+        GradientButton(
+            text = "Sign up",
+            onClick = onSignUpClick
+        )
     }
 }
 
 fun Context.showSignUpToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
+
 
 
 
