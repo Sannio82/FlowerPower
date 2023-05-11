@@ -47,7 +47,7 @@ fun WelcomeScreen(
                 .padding(top = 50.dp),
             text = "FLOWER POWER",
             fontSize = 50.sp,
-            fontFamily = jambo,
+            fontFamily = vanillaCake,
             fontWeight = FontWeight(600),
             color = Blue
         )

@@ -63,7 +63,7 @@ fun PlantsScreen() {
         ) {
             Text(text = "Mina plantor!",
                 fontSize = 35.sp,
-                fontFamily = jambo,
+                fontFamily = vanillaCake,
                 fontWeight = FontWeight(600),
                 color = Blue
             )
@@ -90,7 +90,7 @@ fun PlantsScreen() {
             contentColor = Color.Black,
             backgroundColor = FloatingButtonColor
             ) {
-            Text("+", fontSize = 40.sp, fontWeight = FontWeight.Bold)
+            Text("+", fontSize = 40.sp, fontWeight = FontWeight.Bold, fontFamily = vanillaCake, color = Blue)
         }
         if(isCreatePlantScreenOpen) {
             CreateNewPlantView(closeAction = { isCreatePlantScreenOpen = false })

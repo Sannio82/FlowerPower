@@ -28,8 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
+import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
 import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.composables.FlowerPowerField
@@ -140,7 +142,7 @@ fun SignUpHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "CreateAccount!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold)
+        Text(text = "CreateAccount!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
     }
 }
 
@@ -175,7 +177,7 @@ fun SignUpFields(username: String, password: String,
         )
 
         Button(onClick = { navController.navigate("WelcomeScreen")}) {
-            Text("Tillbaka!")
+            Text("Tillbaka!", fontFamily = vanillaCake)
         }
     }
 }
@@ -185,8 +187,12 @@ fun SignUpFooter(
     onSignUpClick: () -> Unit
 ) {
     Column() {
-        Button(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Sign up")
+        Button(onClick = onSignUpClick,
+            modifier = Modifier
+            .fillMaxWidth()
+
+        ) {
+            Text("Sign up", fontFamily = vanillaCake)
         }
     }
 }
