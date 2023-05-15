@@ -104,7 +104,6 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             TextField(
                 value = plantName,
                 label = { Text(text = "Namn på planta", fontFamily = vanillaCake) },
-                placeholder = { Text(text = "Skriv namn på plantan", fontFamily = vanillaCake) },
                 onValueChange = { newPlantName ->
                     plantName = newPlantName
                 },
@@ -113,7 +112,6 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             TextField(
                 value = description,
                 label = { Text(text = "Beskrivning", fontFamily = vanillaCake) },
-                placeholder = { Text(text = "Skriv namn på plantan", fontFamily = vanillaCake) },
                 onValueChange = { newDescription ->
                     description = newDescription
                 })

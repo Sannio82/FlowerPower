@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +27,7 @@ import com.example.flowerpower.ui.theme.*
 import com.example.flowerpower.viewmodels.Plant
 import com.example.flowerpower.views.CreateNewPlantView
 import com.example.flowerpower.views.composables.PlantCard
+import com.example.flowerpower.R
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -61,7 +63,7 @@ fun PlantsScreen() {
                 .padding(top = 30.dp, bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Mina plantor!",
+            Text(text = stringResource(id = R.string.my_plants),
                 fontSize = 35.sp,
                 fontFamily = vanillaCake,
                 fontWeight = FontWeight(600),
@@ -76,9 +78,9 @@ fun PlantsScreen() {
                     }
                 }
             } else {
-                Text(" Du har inte några tillagda plantor än... ")
+                Text(stringResource(id = R.string.no_added_plants))
                 TextButton(onClick = { isCreatePlantScreenOpen = true }) {
-                   Text(text = "...men det är lätt ordnat om du trycker här!")
+                   Text(text = stringResource(id = R.string.text_easy_to_add))
                 }
             }
         }

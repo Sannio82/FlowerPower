@@ -7,6 +7,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.example.flowerpower.R
 import com.example.flowerpower.ui.theme.Blue
 
 @Composable
@@ -21,7 +23,7 @@ fun ButtonBack(
         ) {
             Icon(
                 Icons.Default.ArrowBack,
-                contentDescription = "Go back",
+                contentDescription = stringResource(id = R.string.back),
                 tint = Blue
             )
         }

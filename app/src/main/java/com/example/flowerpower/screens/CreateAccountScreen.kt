@@ -59,6 +59,15 @@ fun CreateAccountScreen(
     var showFailedDialog by remember {
         mutableStateOf(false)
     }
+    val context = LocalContext.current
+    val toastMessage by viewModel.toastMessage.collectAsState()
+
+    if (toastMessage != null) {
+        LaunchedEffect(toastMessage) {
+            viewModel.showToastMessage(context, toastMessage)
+            viewModel.showToastMessage(null, "") // Reset the toast message to avoid showing it again
+        }
+    }
 
     LaunchedEffect(key1 = loginStatus ) {
         when(loginStatus) {
@@ -133,7 +142,7 @@ fun CreateAccountScreen(
                             localContext.showToast("Enter your password")
                         }
                         else -> {
-                            viewModel.createAccount(userName, password)
+                            viewModel.createAccount(context, userName, password)
                         }
                     }
                 }

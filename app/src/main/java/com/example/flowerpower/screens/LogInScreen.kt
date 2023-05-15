@@ -33,7 +33,6 @@ import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
 import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
-import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.button.ButtonBack
 import com.example.flowerpower.views.button.GradientButton
 import com.example.flowerpower.views.composables.FlowerPowerField
@@ -59,12 +58,20 @@ fun LogInScreen(navController: NavController)
     var showFailedDialog by remember {
         mutableStateOf(false)
     }
+    val context = LocalContext.current
+    val toastMessage by viewModel.toastMessage.collectAsState()
 
-    LaunchedEffect(key1 = loginStatus ) {
+    if (toastMessage != null) {
+        LaunchedEffect(toastMessage) {
+            viewModel.showToastMessage(context, toastMessage)
+            viewModel.showToastMessage(null, "") // Reset the toast message to avoid showing it again
+        }
+    }
+
+ /*   LaunchedEffect(key1 = loginStatus ) {
         when(loginStatus) {
             is UserLoginStatus.Failure -> {
-                localContext.showToast("Unable to login")
-                println("Can not login!!!")
+                localContext.showToast(stringResource(id = R.string.unable_log_in))
                 showFailedDialog = true
             }
             UserLoginStatus.Successful -> {
@@ -75,7 +82,7 @@ fun LogInScreen(navController: NavController)
 
             }
         }
-    }
+    }*/
 
     Box(
         modifier = Modifier
@@ -132,7 +139,7 @@ Box() {
                             localContext.showToast("Enter your password")
                         }
                         else -> {
-                            viewModel.performLogin(userName, password)
+                            viewModel.performLogin(context, userName, password)
                         }
                     }
                 },

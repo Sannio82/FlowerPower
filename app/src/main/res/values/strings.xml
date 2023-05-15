@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">FlowerPower</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">Create account</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="enter_email">Enter your email address</string>
+    <string name="click_create_account">Don´t have an account? Click here</string>
+    <string name="my_plants">My plants</string>
+    <string name="no_added_plants">You haven´t added any plants yet…</string>
+    <string name="text_easy_to_add">…but that is easily fixed if you press here</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="add_new_plant">Add new plant</string>
+    <string name="plant_name">Plant name</string>
+    <string name="description">Description</string>
+    <string name="save">Save</string>
+
+    //Toasts
+    <string name="unable_log_in">Login failed</string>
+    <string name="log_in_successful">Login successful</string>
+    <string name="enter_username">Enter your username</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="enter_plant_name">Enter name of plant</string>
+    <string name="enter_description">Enter description</string>
+
+    //Navigation
+    <string name="home">Home</string>
 </resources>

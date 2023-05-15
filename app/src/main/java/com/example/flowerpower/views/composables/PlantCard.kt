@@ -46,7 +46,7 @@ fun PlantCard(plant: Plant) {
                     painter = rememberAsyncImagePainter(model = plant.imageUrl),
                     contentDescription = null,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(15.dp))
+                        .clip(RoundedCornerShape(35.dp))
                         .fillMaxWidth()
                 )
                     //TODO make image clickable to show popup to reset timer if plant is watered
