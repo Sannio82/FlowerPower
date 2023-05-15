@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -44,22 +45,22 @@ class MainActivity: ComponentActivity() {
                                     BottomNavItem(
                                         route = "WelcomeScreen",
                                         icon = Icons.Default.Home,
-                                        name = "Home"
+                                        name = stringResource(id = R.string.home)
                                 ),
                                     BottomNavItem(
                                         route = "LogInScreen",
                                         icon = Icons.Default.Star,
-                                        name = "Log in"
+                                        name = stringResource(id = R.string.sign_in)
                                     ),
                                     BottomNavItem(
                                         route = "CreateAccountScreen",
                                         icon = Icons.Default.AccountBox,
-                                        name = "Create account"
+                                        name = stringResource(id = R.string.create_account)
                                     ),
                                     BottomNavItem(
                                         route = "PlantsScreen",
                                         icon = Icons.Default.Phone,
-                                        name = "My Plants"
+                                        name = stringResource(id = R.string.my_plants)
                                     )
                             ), onItemClicked = {
                                 navController.navigate(it.route)

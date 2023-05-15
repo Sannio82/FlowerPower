@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FlowerPower</string>
+    <string name="sign_in">Logga in</string>
+    <string name="sign_up">Skapa konto</string>
+    <string name="username">Användarnamn</string>
+    <string name="password">Lösenord</string>
+    <string name="create_account">Skapa konto</string>
+    <string name="welcome_back">Välkommen tillbaka!</string>
+    <string name="sign_in_to_continue">Logga in för att fortsätta</string>
+    <string name="enter_email">Skriv in din mailadress</string>
+    <string name="click_create_account">Har du inget konto? Tryck här</string>
+    <string name="my_plants">Mina plantor</string>
+    <string name="no_added_plants">Du har inte några tillagda plantor än…</string>
+    <string name="text_easy_to_add">…men det är lätt ordnat om du trycker här!</string>
+    <string name="back">Tillbaka</string>
+    <string name="close">Stäng</string>
+    <string name="add_new_plant">Lägg till en planta</string>
+    <string name="plant_name">Namn på planta</string>
+    <string name="description">Beskrivning</string>
+    <string name="save">Spara</string>
+    <string name="delete">Ta bort planta</string>
+
+    //Toasts
+    <string name="unable_log_in">Kunde inte logga in</string>
+    <string name="log_in_successful">Du är inloggad</string>
+    <string name="enter_username">Skriv in ditt användarnamn</string>
+    <string name="enter_password">Skriv in ditt lösenord</string>
+    <string name="enter_plant_name">Skriv in plantans namn</string>
+    <string name="enter_description">Skriv en beskrivning av plantan</string>
+    <string name="account_success">Ett konto har skapats</string>
+    <string name="account_exists">Det finns redan ett konto med den här mailadressen</string>
+    <string name="unable_create">Kunde inte skapa ett konto</string>
+    <string name="plant_added_successfully">Din planta har lagts till</string>
+
+    //Navigation
+    <string name="home">Hem</string>
+</resources>

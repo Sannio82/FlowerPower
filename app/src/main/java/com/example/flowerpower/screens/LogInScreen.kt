@@ -1,7 +1,5 @@
 package com.example.flowerpower.screens
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -28,52 +27,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.flowerpower.R
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
 import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
-import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.button.ButtonBack
 import com.example.flowerpower.views.button.GradientButton
 import com.example.flowerpower.views.composables.FlowerPowerField
 
 
 @Composable
-fun LogInScreen(navController: NavController)
-{
+fun LogInScreen(navController: NavController) {
     val viewModel: AuthViewModel = viewModel()
-
-    val localContext = LocalContext.current
 
     var userName by remember {
         mutableStateOf("")
     }
-
     var password by remember {
         mutableStateOf("")
     }
+    val context = LocalContext.current
+    val toastMessage by viewModel.toastMessage.collectAsState()
 
-    val loginStatus by viewModel.userLoginStatus.collectAsState()
-
-    var showFailedDialog by remember {
-        mutableStateOf(false)
-    }
-
-    LaunchedEffect(key1 = loginStatus ) {
-        when(loginStatus) {
-            is UserLoginStatus.Failure -> {
-                localContext.showToast("Unable to login")
-                println("Can not login!!!")
-                showFailedDialog = true
-            }
-            UserLoginStatus.Successful -> {
-                localContext.showToast("Login successful")
-                navController.navigate("PlantsScreen")
-            }
-            null -> {
-
-            }
+    if (toastMessage != null) {
+        LaunchedEffect(toastMessage) {
+            viewModel.showToastMessage(context, messageResId = 0)
+            viewModel.showToastMessage(null, null) // Reset the toast message to avoid showing it again
         }
     }
 
@@ -125,14 +106,14 @@ Box() {
                 onSignInClick = {
                     when {
                         userName.isBlank() -> {
-                            //Use error field for this
-                            localContext.showToast("Enter your username")
+                            viewModel.showToastMessage(context, R.string.enter_email)
                         }
                         password.isBlank() -> {
-                            localContext.showToast("Enter your password")
+                            viewModel.showToastMessage(context, R.string.enter_password)
                         }
                         else -> {
-                            viewModel.performLogin(userName, password)
+                            viewModel.performLogin(context, userName, password)
+                            navController.navigate("PlantsScreen")
                         }
                     }
                 },
@@ -143,10 +124,6 @@ Box() {
         }
     }
     }
-
-    if(showFailedDialog) {
-        //Alert Dialog
-    }
 }
 
 @Composable
@@ -154,8 +131,8 @@ fun LoginHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome back!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
-        Text(text = "Sign in to continue", fontSize = 18.sp, fontWeight = FontWeight.SemiBold, fontFamily = vanillaCake, color = Blue)
+        Text(text = stringResource(id = R.string.welcome_back), fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
+        Text(text = stringResource(id = R.string.sign_in_to_continue), fontSize = 18.sp, fontWeight = FontWeight.SemiBold, fontFamily = vanillaCake, color = Blue)
     }
 }
 
@@ -167,8 +144,8 @@ fun LoginFields(username: String, password: String,
     Column() {
         FlowerPowerField(
             value = username,
-            label = "Username",
-            placeholder = "Enter your email address",
+            label = stringResource(id = R.string.username),
+            placeholder = stringResource(id = R.string.enter_email),
             onValueChange = onUsernameChange,
             leadingIcon = {
                 Icon(Icons.Default.Email, contentDescription = "Email")
@@ -178,8 +155,8 @@ fun LoginFields(username: String, password: String,
         Spacer(Modifier.height(8.dp))
 
         FlowerPowerField(value = password,
-            label = "Password",
-            placeholder = "Enter your password",
+            label = stringResource(id = R.string.password),
+            placeholder = stringResource(id = R.string.enter_password),
             onValueChange = onPasswordChange,
             visualTransformation = PasswordVisualTransformation(),
             leadingIcon = {
@@ -197,15 +174,12 @@ fun LoginFooter(
 ) {
     Column {
       GradientButton(
-          text = "Sign in",
+          text = stringResource(id = R.string.sign_in),
             onClick = onSignInClick
           )
         TextButton(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
-            Text("Don´t have an account? Click here", fontFamily = vanillaCake, color = Blue)
+            Text(stringResource(id = R.string.click_create_account), fontFamily = vanillaCake, color = Blue)
         }
     }
 }
 
-fun Context.showToast(msg: String) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-}

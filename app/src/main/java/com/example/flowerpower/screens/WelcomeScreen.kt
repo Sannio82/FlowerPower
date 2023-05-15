@@ -11,12 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.flowerpower.ui.theme.*
 import com.example.flowerpower.views.button.GradientButton
+import com.example.flowerpower.R
 
 @Composable
 fun WelcomeScreen(
@@ -63,11 +65,11 @@ fun WelcomeScreen(
         }
         Spacer(modifier = Modifier.size(60.dp))
         GradientButton(
-            text = "Sign in",
+            text = stringResource(id = R.string.sign_in),
         ) { navController.navigate("LogInScreen") }
         Spacer(modifier = Modifier.size(20.dp))
         GradientButton(
-            text = "Create account",
+            text = stringResource(R.string.create_account),
 
             ) { navController.navigate("CreateAccountScreen") }
     }
