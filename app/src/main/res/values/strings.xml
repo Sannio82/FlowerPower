@@ -26,6 +26,9 @@
     <string name="enter_password">Enter your password</string>
     <string name="enter_plant_name">Enter name of plant</string>
     <string name="enter_description">Enter description</string>
+    <string name="account_success">Account created successfully</string>
+    <string name="account_exists">An account with this email already exists</string>
+    <string name="unable_create">Unable to create account</string>
 
     //Navigation
     <string name="home">Home</string>

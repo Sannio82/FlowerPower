@@ -27,6 +27,9 @@
     <string name="enter_password">Skriv in ditt lösenord</string>
     <string name="enter_plant_name">Skriv in plantans namn</string>
     <string name="enter_description">Skriv en beskrivning av plantan</string>
+    <string name="account_success">Ett konto har skapats</string>
+    <string name="account_exists">Det finns redan ett konto med den här mailadressen</string>
+    <string name="unable_create">Kunde inte skapa ett konto</string>
 
     //Navigation
     <string name="home">Hem</string>

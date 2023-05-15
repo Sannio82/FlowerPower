@@ -1,7 +1,5 @@
 package com.example.flowerpower.screens
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -27,62 +26,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.flowerpower.R
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.ui.theme.Coral
 import com.example.flowerpower.ui.theme.Yellow
 import com.example.flowerpower.ui.theme.vanillaCake
 import com.example.flowerpower.viewmodels.AuthViewModel
-import com.example.flowerpower.viewmodels.UserLoginStatus
 import com.example.flowerpower.views.button.ButtonBack
 import com.example.flowerpower.views.button.GradientButton
 import com.example.flowerpower.views.composables.FlowerPowerField
 
 @Composable
-fun CreateAccountScreen(
-    navController: NavController
-)
-{
+fun CreateAccountScreen(navController: NavController) {
     val viewModel: AuthViewModel = viewModel()
-
-    val localContext = LocalContext.current
-
+    
     var userName by remember {
         mutableStateOf("")
     }
-
     var password by remember {
         mutableStateOf("")
     }
 
-    val loginStatus by viewModel.userLoginStatus.collectAsState()
-
-    var showFailedDialog by remember {
-        mutableStateOf(false)
-    }
     val context = LocalContext.current
     val toastMessage by viewModel.toastMessage.collectAsState()
 
     if (toastMessage != null) {
         LaunchedEffect(toastMessage) {
-            viewModel.showToastMessage(context, toastMessage)
-            viewModel.showToastMessage(null, "") // Reset the toast message to avoid showing it again
-        }
-    }
-
-    LaunchedEffect(key1 = loginStatus ) {
-        when(loginStatus) {
-            is UserLoginStatus.Failure -> {
-                localContext.showToast("Unable to login")
-                println("Can not login!!!")
-                showFailedDialog = true
-            }
-            UserLoginStatus.Successful -> {
-                localContext.showToast("Login successful")
-                navController.navigate("PlantsScreen")
-            }
-            null -> {
-
-            }
+            viewModel.showToastMessage(context, 0)
+            viewModel.showToastMessage(null, null) // Reset the toast message to avoid showing it again
         }
     }
 
@@ -135,11 +106,10 @@ fun CreateAccountScreen(
                 onSignUpClick = {
                     when {
                         userName.isBlank() -> {
-                            //Use error field for this
-                            localContext.showToast("Enter your username")
+                            viewModel.showToastMessage(context, R.string.enter_email)
                         }
                         password.isBlank() -> {
-                            localContext.showToast("Enter your password")
+                            viewModel.showToastMessage(context, R.string.enter_password)
                         }
                         else -> {
                             viewModel.createAccount(context, userName, password)
@@ -150,10 +120,6 @@ fun CreateAccountScreen(
         }
     }
     }
-
-    if(showFailedDialog) {
-        //Alert Dialog
-    }
 }
 
 @Composable
@@ -161,7 +127,7 @@ fun SignUpHeader() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Create account!", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
+        Text(text = stringResource(id = R.string.create_account), fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = vanillaCake, color = Blue)
     }
 }
 
@@ -173,8 +139,8 @@ fun SignUpFields(username: String, password: String,
     Column() {
         FlowerPowerField(
             value = username,
-            label = "Username",
-            placeholder = "Enter your email address",
+            label = stringResource(id = R.string.username),
+            placeholder = stringResource(id = R.string.enter_email),
             onValueChange = onUsernameChange,
             leadingIcon = {
                 Icon(Icons.Default.Email, contentDescription = "Email")
@@ -184,8 +150,8 @@ fun SignUpFields(username: String, password: String,
         Spacer(Modifier.height(8.dp))
 
         FlowerPowerField(value = password,
-            label = "Password",
-            placeholder = "Enter your password",
+            label = stringResource(id = R.string.password),
+            placeholder = stringResource(id = R.string.enter_password),
             onValueChange = onPasswordChange,
             visualTransformation = PasswordVisualTransformation(),
             leadingIcon = {
@@ -202,15 +168,12 @@ fun SignUpFooter(
 ) {
     Column() {
         GradientButton(
-            text = "Sign up",
+            text = stringResource(id = R.string.sign_up),
             onClick = onSignUpClick
         )
     }
 }
 
-fun Context.showSignUpToast(msg: String) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-}
 
 
 
