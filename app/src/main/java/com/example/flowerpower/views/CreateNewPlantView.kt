@@ -41,7 +41,6 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
 
     var plantName by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
@@ -125,23 +124,24 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             ) {
                 GradientButton(
                     text = stringResource(id = R.string.save),
-                ) {
-                    if (TextUtils.isEmpty(plantName)) {
-                        Toast.makeText(context, "Please enter plant name", Toast.LENGTH_SHORT).show()
-                    } else if (TextUtils.isEmpty(description)) {
-                        Toast.makeText(context, "Please enter description", Toast.LENGTH_SHORT).show()
-                    }  else {
-                        selectedImageUri?.let {
-                            StorageRepository.addDataToFirebase(
-                                plantName,
-                                description,
-                                it,
-                                context
-                            )
+                    onClick = {
+                        if (TextUtils.isEmpty(plantName)) {
+                            Toast.makeText(context, "Please enter plant name", Toast.LENGTH_SHORT).show()
+                        } else if (TextUtils.isEmpty(description)) {
+                            Toast.makeText(context, "Please enter description", Toast.LENGTH_SHORT).show()
+                        }  else {
+                            selectedImageUri?.let {
+                                StorageRepository.addDataToFirebase(
+                                    plantName,
+                                    description,
+                                    it,
+                                    context
+                                )
+                            }
+                            closeAction()
                         }
-                        closeAction()
                     }
-                }
+                )
             }
         }
     }

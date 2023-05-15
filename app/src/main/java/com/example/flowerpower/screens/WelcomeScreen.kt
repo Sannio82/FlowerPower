@@ -66,12 +66,13 @@ fun WelcomeScreen(
         Spacer(modifier = Modifier.size(60.dp))
         GradientButton(
             text = stringResource(id = R.string.sign_in),
-        ) { navController.navigate("LogInScreen") }
+            onClick = { navController.navigate("LogInScreen") }
+        )
         Spacer(modifier = Modifier.size(20.dp))
         GradientButton(
             text = stringResource(R.string.create_account),
-
-            ) { navController.navigate("CreateAccountScreen") }
+            onClick = { navController.navigate("CreateAccountScreen") }
+            )
     }
     }
 }
