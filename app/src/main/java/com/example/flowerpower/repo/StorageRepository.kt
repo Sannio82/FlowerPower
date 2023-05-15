@@ -14,33 +14,56 @@ object StorageRepository {
     fun addDataToFirebase(
         plantName: String,
         plantDescription: String,
-        imageUri: Uri,
+        imageUri: Uri?,
         context: Context
     ) {
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val dbPlants: CollectionReference = db.collection("plants")
         val plantId = UUID.randomUUID().toString()
 
-        val storageRef = FirebaseStorage.getInstance().getReference("images/$plantId")
-        storageRef.putFile(imageUri)
-            .addOnSuccessListener { uploadTask ->
-                storageRef.downloadUrl.addOnSuccessListener { uri ->
-                    val plant = Plant(plantName, plantDescription, uri)
-                    dbPlants.document(plantId).set(plant)
-                        .addOnSuccessListener {
-                            Toast.makeText(
-                                context,
-                                "Your plant and image has been added successfully!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+        val plant = Plant(plantId, plantName, plantDescription, null)
+
+        if (imageUri != null) {
+            val storageRef = FirebaseStorage.getInstance().getReference("images/$plantId")
+            storageRef.putFile(imageUri)
+                .addOnSuccessListener {
+                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                        plant.imageUrl = uri
+                        savePlantData(dbPlants, plantId, plant, context)
+                    }
                         .addOnFailureListener { e ->
-                            Toast.makeText(context, "Failed to add plant \n$e", Toast.LENGTH_SHORT).show()
+                            showToast(context, "Failed to get image URL: $e")
                         }
                 }
+                .addOnFailureListener { e ->
+                    showToast(context, "Failed to upload image: $e")
+                }
+        } else {
+            savePlantData(dbPlants, plantId, plant, context)
+        }
+    }
+
+    private fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+    private fun savePlantData(
+        dbPlants: CollectionReference,
+        plantId: String,
+        plant: Plant,
+        context: Context
+    ) {
+        dbPlants.document(plantId).set(plant)
+            .addOnSuccessListener {
+                showToast(
+                    context,
+                    "Your plant has been added successfully!"
+                )
             }
             .addOnFailureListener { e ->
-                Toast.makeText(context, "Failed to upload image \n$e", Toast.LENGTH_SHORT).show()
+                showToast(
+                    context,
+                    "Failed to add plant: $e"
+                )
             }
     }
 
@@ -56,6 +79,7 @@ object StorageRepository {
                     val imageUrl = document.getString("imageUrl")
                     val uri = if (!imageUrl.isNullOrEmpty()) Uri.parse(imageUrl) else Uri.EMPTY
                     val plant = Plant(
+                        document.getString("id") ?: "",
                         document.getString("title") ?: "",
                         document.getString("description") ?: "",
                         uri
@@ -68,9 +92,19 @@ object StorageRepository {
                 Toast.makeText(context, "Fail to get data", Toast.LENGTH_SHORT).show()
             }
     }
+     fun deleteData(plantId: String, context: Context) {
+        val db = FirebaseFirestore.getInstance()
+        val plantRef = db.collection("plants").document(plantId)
+
+        plantRef.delete()
+            .addOnSuccessListener {
+                showToast(context,"Plant deleted successfully")
+            }
+            .addOnFailureListener{e ->
+                showToast(context, "Failed to delete plant: $e")
+            }
+    }
 }
-
-
 
 
 

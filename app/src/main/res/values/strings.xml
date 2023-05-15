@@ -18,6 +18,7 @@
     <string name="plant_name">Plant name</string>
     <string name="description">Description</string>
     <string name="save">Save</string>
+    <string name="delete">Delete plant</string>
 
     //Toasts
     <string name="unable_log_in">Login failed</string>
@@ -29,6 +30,7 @@
     <string name="account_success">Account created successfully</string>
     <string name="account_exists">An account with this email already exists</string>
     <string name="unable_create">Unable to create account</string>
+    <string name="plant_added_successfully">Plant added successfully</string>
 
     //Navigation
     <string name="home">Home</string>

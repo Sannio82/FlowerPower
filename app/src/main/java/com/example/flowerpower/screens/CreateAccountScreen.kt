@@ -39,7 +39,7 @@ import com.example.flowerpower.views.composables.FlowerPowerField
 @Composable
 fun CreateAccountScreen(navController: NavController) {
     val viewModel: AuthViewModel = viewModel()
-    
+
     var userName by remember {
         mutableStateOf("")
     }

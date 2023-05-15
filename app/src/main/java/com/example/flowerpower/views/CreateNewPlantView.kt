@@ -31,6 +31,7 @@ import com.example.flowerpower.ui.theme.Beige
 import com.example.flowerpower.ui.theme.Blue
 import com.example.flowerpower.views.button.GradientButton
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.example.flowerpower.repo.StorageRepository
 import com.example.flowerpower.ui.theme.vanillaCake
@@ -84,7 +85,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 }
             }
             Text(
-                text = "Lägg till ny planta",
+                text = stringResource(id = R.string.add_new_plant),
                 fontSize = 35.sp,
                 fontFamily = vanillaCake,
                 fontWeight = FontWeight(600),
@@ -103,7 +104,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 }
             TextField(
                 value = plantName,
-                label = { Text(text = "Namn på planta", fontFamily = vanillaCake) },
+                label = { Text(text = stringResource(id = R.string.plant_name), fontFamily = vanillaCake) },
                 onValueChange = { newPlantName ->
                     plantName = newPlantName
                 },
@@ -111,7 +112,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
             Spacer(modifier = Modifier.size(5.dp))
             TextField(
                 value = description,
-                label = { Text(text = "Beskrivning", fontFamily = vanillaCake) },
+                label = { Text(text = stringResource(id = R.string.description), fontFamily = vanillaCake) },
                 onValueChange = { newDescription ->
                     description = newDescription
                 })
@@ -123,7 +124,7 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 GradientButton(
-                    text = "Spara",
+                    text = stringResource(id = R.string.save),
                 ) {
                     if (TextUtils.isEmpty(plantName)) {
                         Toast.makeText(context, "Please enter plant name", Toast.LENGTH_SHORT).show()
