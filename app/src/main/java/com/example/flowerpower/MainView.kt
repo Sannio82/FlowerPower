@@ -41,12 +41,12 @@ fun Content(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "LogInScreen"
+        startDestination = "WelcomeScreen"
     ) {
         composable(route = "WelcomeScreen") { WelcomeScreen(navController) }
         composable(route = "LogInScreen") { LogInScreen(navController) }
         composable(route = "CreateAccountScreen") { CreateAccountScreen(navController)}
-        composable(route = "PlantsScreen") { PlantsScreen()}
+        composable(route = "PlantsScreen") { PlantsScreen(navController)}
     }
 }
 

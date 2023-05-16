@@ -119,6 +119,9 @@ Box() {
                 },
                 onSignUpClick = {
                     navController.navigate("CreateAccountScreen")
+                },
+                onSignOutClick = {
+                    viewModel.signOut(context)
                 }
             )
         }
@@ -170,7 +173,8 @@ fun LoginFields(username: String, password: String,
 @Composable
 fun LoginFooter(
     onSignInClick: () -> Unit,
-    onSignUpClick: () -> Unit
+    onSignUpClick: () -> Unit,
+    onSignOutClick: () -> Unit
 ) {
     Column {
       GradientButton(
@@ -179,6 +183,9 @@ fun LoginFooter(
           )
         TextButton(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(id = R.string.click_create_account), fontFamily = vanillaCake, color = Blue)
+        }
+        TextButton(onClick = onSignOutClick, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(id = R.string.sign_out), fontFamily = vanillaCake, color = Blue)
         }
     }
 }

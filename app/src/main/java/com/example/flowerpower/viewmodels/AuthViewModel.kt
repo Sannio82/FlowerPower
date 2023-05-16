@@ -35,6 +35,12 @@ class AuthViewModel: ViewModel() {
             }
         )
     }
+    fun signOut(context: Context) {
+        FirebaseAuthRepo.signOut(firebaseAuth) {
+            showToastMessage(context, R.string.log_out_successful)
+        }
+    }
+
 
     fun createAccount(context: Context, username: String, password: String) {
         FirebaseAuthRepo.signUp(

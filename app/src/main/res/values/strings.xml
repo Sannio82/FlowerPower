@@ -10,6 +10,8 @@
     <string name="enter_email">Enter your email address</string>
     <string name="click_create_account">Don´t have an account? Click here</string>
     <string name="my_plants">My plants</string>
+    <string name="must_be_signed_in">You must sign in to be able to see your plants</string>
+    <string name="sign_in_here">Sign in here!</string>
     <string name="no_added_plants">You haven´t added any plants yet…</string>
     <string name="text_easy_to_add">…but that is easily fixed if you press here</string>
     <string name="back">Back</string>
@@ -19,6 +21,7 @@
     <string name="description">Description</string>
     <string name="save">Save</string>
     <string name="delete">Delete plant</string>
+    <string name="sign_out">Sign out</string>
 
     //Toasts
     <string name="unable_log_in">Login failed</string>
@@ -31,6 +34,7 @@
     <string name="account_exists">An account with this email already exists</string>
     <string name="unable_create">Unable to create account</string>
     <string name="plant_added_successfully">Plant added successfully</string>
+    <string name="log_out_successful">Log out successfully</string>
 
     //Navigation
     <string name="home">Home</string>

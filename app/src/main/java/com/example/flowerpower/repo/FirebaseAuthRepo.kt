@@ -23,6 +23,12 @@ object FirebaseAuthRepo {
             }
     }
 
+    fun signOut(firebaseAuth: FirebaseAuth, onSuccess: () -> Unit) {
+        firebaseAuth.signOut()
+        onSuccess()
+    }
+
+
     fun signUp(
         firebaseAuth: FirebaseAuth,
         username: String,
