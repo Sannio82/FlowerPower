@@ -28,7 +28,7 @@ fun GradientButton(
     Button(
         onClick = onClick,
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth(0.7f)
             .clip(RoundedCornerShape(40.dp))
             .background(gradient),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),

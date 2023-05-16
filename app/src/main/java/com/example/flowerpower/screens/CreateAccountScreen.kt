@@ -1,5 +1,6 @@
 package com.example.flowerpower.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -81,6 +83,25 @@ fun CreateAccountScreen(navController: NavController) {
                 .background(Color.White)
         )
         Box(){
+            Box(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.logga_one),
+                        contentDescription = null,
+                        modifier = Modifier.size(80.dp)
+                    )
+                }
+            }
             ButtonBack(
                 modifier = Modifier.padding(35.dp),
                 onClick = { navController.navigate("WelcomeScreen") }
