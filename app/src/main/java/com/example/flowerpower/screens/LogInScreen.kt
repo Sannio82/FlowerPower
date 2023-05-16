@@ -83,70 +83,70 @@ fun LogInScreen(navController: NavController) {
                 )
                 .background(Color.White)
         )
-Box() {
-    Box(
-        modifier = Modifier
-            .padding(top = 5.dp)
-            .fillMaxWidth()
-            .wrapContentHeight()
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logga_one),
-                contentDescription = null,
-                modifier = Modifier.size(80.dp)
-            )
-        }
-    }
-    ButtonBack(
-        modifier = Modifier.padding(35.dp),
-        onClick = { navController.navigate("WelcomeScreen") }
-    )
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(48.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            LoginHeader()
-            LoginFields(userName, password,
-                onUsernameChange = {
-                    userName = it
-                },
-                onPasswordChange = {
-                    password = it
+        Box() {
+            Box(
+                modifier = Modifier
+                    .padding(top = 5.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.logga_one),
+                        contentDescription = null,
+                        modifier = Modifier.size(80.dp)
+                    )
                 }
+            }
+            ButtonBack(
+                modifier = Modifier.padding(35.dp),
+                onClick = { navController.navigate("WelcomeScreen") }
             )
-            LoginFooter(
-                onSignInClick = {
-                    when {
-                        userName.isBlank() -> {
-                            viewModel.showToastMessage(context, R.string.enter_email)
-                        }
-                        password.isBlank() -> {
-                            viewModel.showToastMessage(context, R.string.enter_password)
-                        }
-                        else -> {
-                            viewModel.performLogin(context, userName, password)
-                            navController.navigate("PlantsScreen")
-                        }
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(48.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+                LoginHeader()
+                LoginFields(userName, password,
+                    onUsernameChange = {
+                        userName = it
+                    },
+                    onPasswordChange = {
+                        password = it
                     }
-                },
-                onSignUpClick = {
-                    navController.navigate("CreateAccountScreen")
-                },
-                onSignOutClick = {
-                    viewModel.signOut(context)
-                }
-            )
+                )
+                LoginFooter(
+                    onSignInClick = {
+                        when {
+                            userName.isBlank() -> {
+                                viewModel.showToastMessage(context, R.string.enter_email)
+                            }
+                            password.isBlank() -> {
+                                viewModel.showToastMessage(context, R.string.enter_password)
+                            }
+                            else -> {
+                                viewModel.performLogin(context, userName, password)
+                                navController.navigate("PlantsScreen")
+                            }
+                        }
+                    },
+                    onSignUpClick = {
+                        navController.navigate("CreateAccountScreen")
+                    },
+                    onSignOutClick = {
+                        viewModel.signOut(context)
+                    }
+                )
+            }
         }
-    }
     }
 }
 
@@ -162,8 +162,8 @@ fun LoginHeader() {
 
 @Composable
 fun LoginFields(username: String, password: String,
-                            onUsernameChange: (String) -> Unit,
-                            onPasswordChange: (String) -> Unit,
+                onUsernameChange: (String) -> Unit,
+                onPasswordChange: (String) -> Unit,
 ) {
     Column() {
         FlowerPowerField(
@@ -198,10 +198,10 @@ fun LoginFooter(
     onSignOutClick: () -> Unit
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-      GradientButton(
-          text = stringResource(id = R.string.sign_in),
+        GradientButton(
+            text = stringResource(id = R.string.sign_in),
             onClick = onSignInClick
-          )
+        )
         TextButton(onClick = onSignUpClick, modifier = Modifier.fillMaxWidth()) {
             Text(stringResource(id = R.string.click_create_account), fontFamily = vanillaCake, color = Blue)
         }

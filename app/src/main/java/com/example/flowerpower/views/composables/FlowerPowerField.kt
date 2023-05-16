@@ -16,7 +16,7 @@ fun FlowerPowerField(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit) {
-    
+
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
@@ -30,5 +30,5 @@ fun FlowerPowerField(
         keyboardOptions = keyboardOptions,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon
-        )
-    }
+    )
+}

@@ -16,6 +16,5 @@ val Typography = Typography(
     )
 )
 
-val jambo = FontFamily(Font(R.font.jambo))
 val robotoMedium = FontFamily(Font(R.font.roboto_medium))
 val vanillaCake = FontFamily(Font(R.font.vanilla_cake))

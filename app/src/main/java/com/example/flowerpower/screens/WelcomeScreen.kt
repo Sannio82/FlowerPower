@@ -33,30 +33,30 @@ fun WelcomeScreen(
             ),
         contentAlignment = Alignment.Center
     ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(0.9f)
-            .fillMaxHeight(0.8f)
-            .background(Color.Transparent),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box() {
-            Image(
-                painter = painterResource(id = R.drawable.logga_one),
-                contentDescription = null,
-                Modifier.size(250.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .fillMaxHeight(0.8f)
+                .background(Color.Transparent),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box() {
+                Image(
+                    painter = painterResource(id = R.drawable.logga_one),
+                    contentDescription = null,
+                    Modifier.size(250.dp)
+                )
+            }
+            Spacer(modifier = Modifier.size(100.dp))
+            GradientButton(
+                text = stringResource(id = R.string.sign_in),
+                onClick = { navController.navigate("LogInScreen") }
+            )
+            Spacer(modifier = Modifier.size(20.dp))
+            GradientButton(
+                text = stringResource(R.string.create_account),
+                onClick = { navController.navigate("CreateAccountScreen") }
             )
         }
-        Spacer(modifier = Modifier.size(100.dp))
-        GradientButton(
-            text = stringResource(id = R.string.sign_in),
-            onClick = { navController.navigate("LogInScreen") }
-        )
-        Spacer(modifier = Modifier.size(20.dp))
-        GradientButton(
-            text = stringResource(R.string.create_account),
-            onClick = { navController.navigate("CreateAccountScreen") }
-            )
-    }
     }
 }

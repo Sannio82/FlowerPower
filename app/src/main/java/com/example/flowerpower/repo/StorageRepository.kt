@@ -92,7 +92,7 @@ object StorageRepository {
                 Toast.makeText(context, "Fail to get data", Toast.LENGTH_SHORT).show()
             }
     }
-     fun deleteData(plantId: String, context: Context) {
+    fun deleteData(plantId: String, context: Context) {
         val db = FirebaseFirestore.getInstance()
         val plantRef = db.collection("plants").document(plantId)
 
