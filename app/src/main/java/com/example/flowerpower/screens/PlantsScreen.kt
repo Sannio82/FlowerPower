@@ -76,40 +76,40 @@ fun PlantsScreen(navController: NavController) {
                     }
                 }
             } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = 15.dp, end = 10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(start = 15.dp, end = 10.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
 
-            ) {
-                Text(
-                    text = stringResource(id = R.string.must_be_signed_in),
-                    fontFamily = vanillaCake,
-                    color = Blue,
-                    fontSize = 25.sp
-                )
-                TextButton(onClick = { navController.navigate("LogInScreen")}) {
+                ) {
                     Text(
-                        text = stringResource(id = R.string.sign_in_here),
+                        text = stringResource(id = R.string.must_be_signed_in),
                         fontFamily = vanillaCake,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = Green,
-                        fontSize = 28.sp
+                        color = Blue,
+                        fontSize = 25.sp
                     )
+                    TextButton(onClick = { navController.navigate("LogInScreen")}) {
+                        Text(
+                            text = stringResource(id = R.string.sign_in_here),
+                            fontFamily = vanillaCake,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Green,
+                            fontSize = 28.sp
+                        )
+                    }
                 }
-            }
             }
         }
 
         FloatingActionButton(
-        modifier = Modifier
-            .padding(bottom = 70.dp, end = 25.dp),
+            modifier = Modifier
+                .padding(bottom = 70.dp, end = 25.dp),
             onClick = { isCreatePlantScreenOpen = true },
             contentColor = Color.Black,
             backgroundColor = FloatingButtonColor
-            ) {
+        ) {
             Text("+", fontSize = 40.sp, fontWeight = FontWeight.Bold, fontFamily = vanillaCake, color = Blue)
         }
         if(isCreatePlantScreenOpen) {
