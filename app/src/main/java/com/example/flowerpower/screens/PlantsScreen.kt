@@ -3,10 +3,7 @@ package com.example.flowerpower.screens
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FloatingActionButton
@@ -22,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.flowerpower.repo.StorageRepository
 import com.example.flowerpower.ui.theme.*
 import com.example.flowerpower.viewmodels.Plant
@@ -31,7 +29,7 @@ import com.example.flowerpower.R
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PlantsScreen() {
+fun PlantsScreen(navController: NavController) {
 
     val context = LocalContext.current
     var plantsList by remember { mutableStateOf(listOf<Plant>()) }
@@ -78,10 +76,30 @@ fun PlantsScreen() {
                     }
                 }
             } else {
-                Text(stringResource(id = R.string.no_added_plants))
-                TextButton(onClick = { isCreatePlantScreenOpen = true }) {
-                   Text(text = stringResource(id = R.string.text_easy_to_add))
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 15.dp, end = 10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+
+            ) {
+                Text(
+                    text = stringResource(id = R.string.must_be_signed_in),
+                    fontFamily = vanillaCake,
+                    color = Blue,
+                    fontSize = 25.sp
+                )
+                TextButton(onClick = { navController.navigate("LogInScreen")}) {
+                    Text(
+                        text = stringResource(id = R.string.sign_in_here),
+                        fontFamily = vanillaCake,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Green,
+                        fontSize = 28.sp
+                    )
                 }
+            }
             }
         }
 

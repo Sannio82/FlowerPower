@@ -7,10 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -59,7 +56,7 @@ class MainActivity: ComponentActivity() {
                                     ),
                                     BottomNavItem(
                                         route = "PlantsScreen",
-                                        icon = Icons.Default.Phone,
+                                        icon =Icons.Default.List,
                                         name = stringResource(id = R.string.my_plants)
                                     )
                             ), onItemClicked = {
@@ -89,6 +86,6 @@ fun Navigation(
         composable(route = "WelcomeScreen") { WelcomeScreen(navController) }
         composable(route = "LogInScreen") { LogInScreen(navController) }
         composable(route = "CreateAccountScreen") { CreateAccountScreen(navController) }
-        composable(route = "PlantsScreen") { PlantsScreen() }
+        composable(route = "PlantsScreen") { PlantsScreen(navController) }
     }
 }

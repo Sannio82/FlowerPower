@@ -40,7 +40,7 @@ fun GradientButton(
             fontFamily = robotoMedium,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(8.dp)
         )
     }
 }
