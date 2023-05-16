@@ -2,6 +2,7 @@ package com.example.flowerpower.screens
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -58,15 +60,27 @@ fun PlantsScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 30.dp, bottom = 20.dp),
+                .padding(top = 5.dp, bottom = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(id = R.string.my_plants),
-                fontSize = 35.sp,
-                fontFamily = vanillaCake,
-                fontWeight = FontWeight(600),
-                color = Blue
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.logga_one),
+                        contentDescription = null,
+                        modifier = Modifier.size(80.dp)
+                    )
+                }
+            }
             if (plantsList.isNotEmpty()) {
                 LazyColumn(
                     modifier = Modifier.padding(bottom = 55.dp)

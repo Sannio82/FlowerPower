@@ -1,20 +1,16 @@
 package com.example.flowerpower.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.ui.Modifier
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.flowerpower.ui.theme.*
 import com.example.flowerpower.views.button.GradientButton
@@ -44,26 +40,14 @@ fun WelcomeScreen(
             .background(Color.Transparent),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            modifier = Modifier
-                .padding(top = 50.dp),
-            text = "FLOWER POWER",
-            fontSize = 50.sp,
-            fontFamily = vanillaCake,
-            fontWeight = FontWeight(600),
-            color = Blue
-        )
-        Spacer(modifier = Modifier.size(25.dp))
         Box() {
-            Icon(
-                Icons.Filled.Phone,
-                tint = Blue,
-                contentDescription = "Localized description",
-                modifier = Modifier
-                    .size(250.dp)
+            Image(
+                painter = painterResource(id = R.drawable.logga_one),
+                contentDescription = null,
+                Modifier.size(250.dp)
             )
         }
-        Spacer(modifier = Modifier.size(60.dp))
+        Spacer(modifier = Modifier.size(100.dp))
         GradientButton(
             text = stringResource(id = R.string.sign_in),
             onClick = { navController.navigate("LogInScreen") }
