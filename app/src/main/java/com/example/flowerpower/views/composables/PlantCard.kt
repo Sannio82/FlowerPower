@@ -1,6 +1,5 @@
 package com.example.flowerpower.views.composables
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -12,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +26,7 @@ import com.example.flowerpower.repo.StorageRepository
 @Composable
 fun PlantCard(plant: Plant) {
 
+    var showDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
     Card(
@@ -56,7 +57,6 @@ fun PlantCard(plant: Plant) {
                             .clip(RoundedCornerShape(35.dp))
                             .fillMaxWidth()
                     )
-                    //TODO make image clickable to show popup to reset timer if plant is watered
                     Image(
                         painterResource(id = R.drawable.waterplants),
                         contentDescription = null,
@@ -71,18 +71,27 @@ fun PlantCard(plant: Plant) {
             }
             IconButton(
                 onClick = {
-                    StorageRepository.deleteData(plant.id, context)
+                    showDialog = true
                 },
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(8.dp)
             ) {
-            Icon(
-                Icons.Default.Delete,
-                contentDescription = stringResource(id = R.string.delete),
-                tint = Blue
-            )
+                Icon(
+                    Icons.Default.Delete,
+                    contentDescription = stringResource(id = R.string.delete),
+                    tint = Blue
+                )
             }
+        }
+        if(showDialog) {
+            DeletePlantAlert(
+                onDismissDialog = { showDialog = false },
+                onDeletePlant = {
+                    StorageRepository.deleteData(plant.id, context)
+                    showDialog = false
+                }
+            )
         }
     }
 }
