@@ -91,23 +91,23 @@ fun CreateNewPlantView(closeAction: () -> Unit) {
                 color = Blue
             )
             Spacer(modifier = Modifier.size(20.dp))
-                IconButton(
-                    modifier = Modifier.padding(bottom = 15.dp),
-                    onClick = {
-                        singlePhotoPickerLauncher.launch(
-                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                        )
-                    })
-                {
-                    SelectedImage(selectedImageUri = selectedImageUri)
-                }
+            IconButton(
+                modifier = Modifier.padding(bottom = 15.dp),
+                onClick = {
+                    singlePhotoPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
+                })
+            {
+                SelectedImage(selectedImageUri = selectedImageUri)
+            }
             TextField(
                 value = plantName,
                 label = { Text(text = stringResource(id = R.string.plant_name), fontFamily = vanillaCake) },
                 onValueChange = { newPlantName ->
                     plantName = newPlantName
                 },
-                )
+            )
             Spacer(modifier = Modifier.size(5.dp))
             TextField(
                 value = description,

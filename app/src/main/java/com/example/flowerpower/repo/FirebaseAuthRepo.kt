@@ -12,7 +12,6 @@ object FirebaseAuthRepo {
         onFailure: (Exception?) -> Unit
 
     ) {
-
         firebaseAuth.signInWithEmailAndPassword(username, password)
             .addOnCompleteListener {
                 if(it.isSuccessful) {
@@ -21,13 +20,12 @@ object FirebaseAuthRepo {
                     onFailure(it.exception)
                 }
             }
-    }
+        }
 
     fun signOut(firebaseAuth: FirebaseAuth, onSuccess: () -> Unit) {
         firebaseAuth.signOut()
         onSuccess()
     }
-
 
     fun signUp(
         firebaseAuth: FirebaseAuth,
@@ -44,5 +42,5 @@ object FirebaseAuthRepo {
                     onFailure(it.exception)
                 }
             }
+        }
     }
-}

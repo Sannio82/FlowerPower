@@ -12,7 +12,6 @@ fun DeletePlantAlert(
     onDismissDialog: () -> Unit,
     onDeletePlant: () -> Unit
 ) {
-
     AlertDialog(
         onDismissRequest = { onDismissDialog() },
         title = {

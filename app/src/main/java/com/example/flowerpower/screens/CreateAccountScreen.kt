@@ -106,40 +106,40 @@ fun CreateAccountScreen(navController: NavController) {
                 modifier = Modifier.padding(35.dp),
                 onClick = { navController.navigate("WelcomeScreen") }
             )
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(48.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround
-        ) {
-            SignUpHeader()
-            SignUpFields(
-                userName, password,
-                onUsernameChange = {
-                    userName = it
-                },
-                onPasswordChange = {
-                    password = it
-                },
-            )
-            SignUpFooter(
-                onSignUpClick = {
-                    when {
-                        userName.isBlank() -> {
-                            viewModel.showToastMessage(context, R.string.enter_email)
-                        }
-                        password.isBlank() -> {
-                            viewModel.showToastMessage(context, R.string.enter_password)
-                        }
-                        else -> {
-                            viewModel.createAccount(context, userName, password)
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .padding(48.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+                SignUpHeader()
+                SignUpFields(
+                    userName, password,
+                    onUsernameChange = {
+                        userName = it
+                    },
+                    onPasswordChange = {
+                        password = it
+                    },
+                )
+                SignUpFooter(
+                    onSignUpClick = {
+                        when {
+                            userName.isBlank() -> {
+                                viewModel.showToastMessage(context, R.string.enter_email)
+                            }
+                            password.isBlank() -> {
+                                viewModel.showToastMessage(context, R.string.enter_password)
+                            }
+                            else -> {
+                                viewModel.createAccount(context, userName, password)
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
         }
-    }
     }
 }
 
@@ -154,8 +154,8 @@ fun SignUpHeader() {
 
 @Composable
 fun SignUpFields(username: String, password: String,
-                onUsernameChange: (String) -> Unit,
-                onPasswordChange: (String) -> Unit,
+                 onUsernameChange: (String) -> Unit,
+                 onPasswordChange: (String) -> Unit,
 ) {
     Column() {
         FlowerPowerField(
